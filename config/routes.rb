@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
+  resources :evenements
+  resources :locations
+  resources :sports
 end
