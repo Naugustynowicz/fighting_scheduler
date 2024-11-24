@@ -1,0 +1,58 @@
+<%= form_with model: location do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    <% location.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :other %><br>
+    <%= form.text_field :other %>
+    <% location.errors.full_messages_for(:other).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :street %><br>
+    <%= form.text_field :street %>
+    <% location.errors.full_messages_for(:street).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :city %><br>
+    <%= form.text_field :city %>
+    <% location.errors.full_messages_for(:city).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :postal_code %><br>
+    <%= form.text_field :postal_code %>
+    <% location.errors.full_messages_for(:postal_code).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :country %><br>
+    <%= form.text_field :country %>
+    <% location.errors.full_messages_for(:country).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, Visible::VALID_STATUSES, selected: location.status || 'public' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

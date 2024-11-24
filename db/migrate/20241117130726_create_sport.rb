@@ -3,6 +3,7 @@ class CreateSport < ActiveRecord::Migration[7.2]
     create_table :sports do |t|
       t.string :name
       t.text :description
+      t.string :status
 
       t.timestamps
     end

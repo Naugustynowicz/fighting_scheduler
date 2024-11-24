@@ -1,0 +1,16 @@
+<h1>Hello, Rails!</h1>
+
+<h1>Evenements</h1>
+
+<ul>
+  <% @evenements.each do |evenement| %>
+    <% unless evenement.archived? %>
+      <li>
+        <%= link_to evenement.title, evenement %>
+        </a>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "New Evenement", new_evenement_path %>

@@ -1,11 +1,12 @@
 class CreateEvenement < ActiveRecord::Migration[7.2]
   def change
     create_table :evenements do |t|
-      t.string :type
+      t.string :type_event
       t.datetime :start_date
       t.datetime :end_date
       t.integer :attendees_nb
       t.decimal :venue_fee
+      t.string :status
 
       # misc
       t.string :name

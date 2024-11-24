@@ -1,0 +1,90 @@
+<%= form_with model: evenement do |form| %>
+  <div>
+    <%= form.label :type_event %><br>
+    <%= form.text_field :type_event %>
+    <% evenement.errors.full_messages_for(:type_event).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :start_date %><br>
+    <%= form.datetime_field :start_date %>
+    <% evenement.errors.full_messages_for(:start_date).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :end_date %><br>
+    <%= form.datetime_field :end_date %>
+    <% evenement.errors.full_messages_for(:end_date).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :attendees_nb %><br>
+    <%= form.number_field :attendees_nb %>
+    <% evenement.errors.full_messages_for(:attendees_nb).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+   <div>
+    <%= form.label :venue_fee %><br>
+    <%= form.number_field :venue_fee %>
+    <% evenement.errors.full_messages_for(:venue_fee).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    <% evenement.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+    <% evenement.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :rules %><br>
+    <%= form.text_area :rules %>
+    <% evenement.errors.full_messages_for(:rules).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :schedule %><br>
+    <%= form.text_area :schedule %>
+    <% evenement.errors.full_messages_for(:schedule).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  
+  <div>
+    <%= form.label :brackets %><br>
+    <%= form.text_area :brackets %>
+    <% evenement.errors.full_messages_for(:brackets).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, Visible::VALID_STATUSES, selected: evenement.status || 'public' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

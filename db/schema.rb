@@ -30,11 +30,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_17_130726) do
   end
 
   create_table "evenements", force: :cascade do |t|
-    t.string "type"
+    t.string "type_event"
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer "attendees_nb"
     t.decimal "venue_fee"
+    t.string "status"
     t.string "name"
     t.text "description"
     t.text "rules"
@@ -55,6 +56,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_17_130726) do
     t.string "city"
     t.string "postal_code"
     t.string "country"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -62,6 +64,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_17_130726) do
   create_table "sports", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
