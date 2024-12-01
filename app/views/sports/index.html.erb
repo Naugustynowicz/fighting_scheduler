@@ -4,7 +4,7 @@
   <% @sports.each do |sport| %>
     <% unless sport.archived? %>
       <li>
-        <%= link_to sport.title, sport %>
+        <%= link_to sport.name, sport %>
         </a>
       </li>
     <% end %>

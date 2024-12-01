@@ -8,6 +8,22 @@
   </div>
 
   <div>
+    <%= form.label :sports_id %><br>
+    <%= form.text_field :sports_id %>
+    <% evenement.errors.full_messages_for(:sports_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :locations_id %><br>
+    <%= form.text_field :locations_id %>
+    <% evenement.errors.full_messages_for(:locations_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
     <%= form.label :start_date %><br>
     <%= form.datetime_field :start_date %>
     <% evenement.errors.full_messages_for(:start_date).each do |message| %>
