@@ -14,8 +14,8 @@ class EvenementTest < ActiveSupport::TestCase
       rules: "Explain ruleset here.",
       schedule: "When and where encounters will happenend.",
       brackets: "Tournament tree goes here.",
-      locations_id: Location.first,
-      sports_id: Sport.first
+      locations_id: Location.first.id,
+      sports_id: Sport.first.id
     )
     assert Evenement.find(evenement.id)
   end
