@@ -1,0 +1,4 @@
+docker compose up --build
+docker compose watch
+
+sudo docker exec -it fighting_scheduler-web-1 bundle exec rake db:migrate RAILS_ENV=test
