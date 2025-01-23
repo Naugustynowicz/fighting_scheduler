@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tournoi1:
+  type_event: Tournament
+  start_date: 2024-12-16T12:22:00
+  end_date: 2024-12-16T12:23:00
+  attendees_nb: 2000
+  venue_fee: 10.99
+  status: public
+  name: Tournament1
+  description: Some informations heres.
+  rules: Explain ruleset here.
+  schedule: When and where encounters will happenend.
+  brackets: Tournament tree goes here.
+  locations_id: <%= Location.first.id %>
+  sports_id: <%= Sport.first.id %>

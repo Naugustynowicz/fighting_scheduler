@@ -17,6 +17,12 @@ class EvenementsController < ApplicationController
     @evenement = Evenement.new(evenement_params)
 
     if @evenement.save
+      if Sport.find_by(id: evenement_params[:sports_id]).nil?
+        redirect_to @sport.new
+      end
+      if Location.find_by(id: evenement_params[:locations_id]).nil?
+        redirect_to @location.new
+      end
       redirect_to @evenement
     else
       render :new, status: :unprocessable_entity
@@ -47,6 +53,6 @@ class EvenementsController < ApplicationController
   private
 
   def evenement_params
-    params.require(:evenement).permit(:type_event, :start_date, :end_date, :attendees_nb, :venue_fee, :name, :description, :rules, :schedule, :brackets, :status)
+    params.require(:evenement).permit(:type_event, :sports_id, :locations_id, :start_date, :end_date, :attendees_nb, :venue_fee, :name, :description, :rules, :schedule, :brackets, :status)
   end
 end
