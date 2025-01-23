@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+location1:
+  name: Location1
+  other: Some misc infos
+  street: 01 StreetTest1 of Location1
+  city: CityName1
+  postal_code: '12345'
+  country: CountryName1
+  status: public

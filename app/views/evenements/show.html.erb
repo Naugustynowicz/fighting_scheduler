@@ -1,0 +1,24 @@
+<h1><%= @evenement.type_event + ' : ' + @evenement.name %></h1>
+<h1><%= @evenement.start_date.to_s + ' : ' + @evenement.end_date.to_s %></h1>
+
+<p><%= @evenement.description %></p>
+<p><%= @evenement.rules %></p>
+<p><%= @evenement.schedule %></p>
+<p><%= @evenement.brackets %></p>
+
+<h1><%= @evenement.attendees_nb %></h1>
+<h1><%= @evenement.venue_fee %></h1>
+
+<ul>
+  <li><%= link_to "Edit", edit_evenement_path(@evenement) %></li>
+  <li><%= link_to "Destroy", evenement_path(@evenement), data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                } %></li>
+</ul>
+
+<h2>location</h2>
+<%= render @evenement.location %>
+
+<h2>sport</h2>
+<%= render @evenement.sport %>
