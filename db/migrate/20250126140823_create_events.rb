@@ -1,23 +1,21 @@
-class CreateEvenement < ActiveRecord::Migration[7.2]
+class CreateEvents < ActiveRecord::Migration[8.0]
   def change
-    create_table :evenements do |t|
-      t.string :type_event
+    create_table :events do |t|
+      # mains infos
       t.datetime :start_date
       t.datetime :end_date
       t.integer :attendees_nb
       t.decimal :venue_fee
-      t.string :status
+      t.integer :required_score
 
       # misc
       t.string :name
       t.text :description
       t.text :rules
       t.text :schedule
-      t.text :brackets # WIP
+      t.text :brackets
 
       t.timestamps
     end
-
-    add_reference :evenements, :locations, null: false, foreign_key: true
   end
 end

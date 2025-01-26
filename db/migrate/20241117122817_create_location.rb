@@ -7,7 +7,6 @@ class CreateLocation < ActiveRecord::Migration[7.2]
       t.string :city
       t.string :postal_code
       t.string :country
-      t.string :status
 
       t.timestamps
     end
