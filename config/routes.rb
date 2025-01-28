@@ -14,7 +14,15 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
+  resources :circuits
+  resources :clubs
   resources :evenements
+  resources :events
   resources :locations
+  resources :roles
   resources :sports
+  resources :statuses
+  resources :teams
+  resources :type_events
+  resources :users
 end
