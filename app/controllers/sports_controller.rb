@@ -9,6 +9,8 @@ class SportsController < ApplicationController
   end
 
   def request_params
-    params.require(:sport).permit(:name, :description, :status)
+    params.require(:sport).permit(
+      :name, :description, :status
+    )
   end
 end

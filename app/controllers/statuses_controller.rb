@@ -9,6 +9,6 @@ class StatusesController < ApplicationController
   end
 
   def request_params
-    params.require(:status).permit(:name, :description, :status)
+    params.require(:status).permit(:name)
   end
 end

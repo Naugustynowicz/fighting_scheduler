@@ -9,6 +9,8 @@ class ClubsController < ApplicationController
   end
 
   def request_params
-    params.require(:club).permit(:name, :description, :status)
+    params.require(:club).permit(
+      :name, :description, :status_id, :user_id, :sport_id, :location_id
+    )
   end
 end

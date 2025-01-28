@@ -9,6 +9,6 @@ class TypeEventsController < ApplicationController
   end
 
   def request_params
-    params.require(:type_event).permit(:name, :description, :status)
+    params.require(:type_event).permit(:name)
   end
 end

@@ -9,6 +9,8 @@ class CircuitsController < ApplicationController
   end
 
   def request_params
-    params.require(:circuit).permit(:name, :description, :status)
+    params.require(:circuit).permit(
+      :name, :description, :user_id, :status_id
+    )
   end
 end
