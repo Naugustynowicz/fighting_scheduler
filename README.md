@@ -1,5 +1,13 @@
 # README
 
+# start dev app
+bin/vite dev # with frontend
+rails server # backend only
+
+# when ready to make mobile application
+https://reactnative.dev/
+
+# Default text
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
