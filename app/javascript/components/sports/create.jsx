@@ -4,7 +4,7 @@ const [answer, setAnswer] = useState('');
 const [error, setError] = useState(null);
 const [status, setStatus] = useState('typing'); // 'typing', 'submitting', or 'success'
 
-export default function SportCreate() {
+export default function SportCreate({sportList, setSportList}) {
   const [sport, setSport] = useState({
     name: 'Sport1',
     description: 'This is a description',

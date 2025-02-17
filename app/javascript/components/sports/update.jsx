@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 
-export default function SportUpdate() {
-  const [sport, setSport] = useState({
-    name: 'Sport1',
-    description: 'This is a description',
-    status: 'public'
-  });
+export default function SportUpdate({sportInit}) {
+  const [sport, setSport] = useState(sportInit);
 
   function handleNameChange(e) {
     setSport({

@@ -1,8 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Button from '../components/button.jsx';
-import Gallery from '../components/gallery.jsx';
-import UpdateSport from '../components/sports/update.jsx';
+import Sports from '../components/sports.jsx';
 
 
 function NavigationBar() {
@@ -15,9 +13,7 @@ const root = createRoot(domNode);
 root.render(
   <>
     <NavigationBar />
-    <Gallery />
-    <Button />
-    <UpdateSport />
+    <Sports />
   </>
 );
 
