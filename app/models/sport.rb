@@ -1,5 +1,3 @@
 class Sport < ApplicationRecord
-  include Visible
-
-  validates :name, presence: true
+  # include Visible
 end

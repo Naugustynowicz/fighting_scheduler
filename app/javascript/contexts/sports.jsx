@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 
 export const SportsContext = createContext(null);
 export const SportsDispatchContext = createContext(null);
@@ -42,14 +42,12 @@ export function SportsProvider({ children }){
   useEffect(() => {
     let ignore = false;
     fetch('http://localhost:3000/sports')
-      .then(response => response.json())
-      .then(
-        json => {
-          if(!ignore){
-            dispatch({type: 'fetched', sports: json})
-          }
-        }
-      )
+    .then(response => response.json())
+    .then(json => {
+      if(!ignore){
+        dispatch({type: 'fetched', sports: json})
+      }
+    })
     return () => ignore = true;
   }, [])
 
@@ -76,20 +74,27 @@ function sportsReducer(sports, action) {
       return [...action.sports];
     }
     case 'added': {
-      // fetch('http://localhost:3000/sports', { method: 'POST', body: {
-      //   id: action.id,
-      //   name: action.name,
-      //   description: action.description,
-      //   status: 'public'
-      // } });
-      //
-      // // alternative
+      let newSport = {
+        "sport": {
+          "name": action.name,
+          "description": action.description,
+          "status": "public"
+        }
+      }
+
+      fetch('http://localhost:3000/sports', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': ''},
+        body: JSON.stringify(newSport)
+      });
+
+      // alternative
       // post(('http://localhost:3000/sports', {
       //   id: action.id,
       //   name: action.name,
       //   description: action.description,
       //   status: 'public'
-      // })
+      // }));
 
       return [
         ...sports,
@@ -118,9 +123,7 @@ function sportsReducer(sports, action) {
       });
     }
     case 'deleted': {
-      // fetch('http://localhost:3000/sports', { method: 'DELETE', body: {
-      //   id: action.id
-      // } });
+      fetch(`http://localhost:3000/sports/${action.id}`, { method: 'DELETE'} );
 
       return sports.filter((sport) => sport.id !== action.id);
     } 
