@@ -1,27 +1,23 @@
 import React, { useState } from 'react';
+import { useSports, useSportsDispatch } from '../../contexts/sports';
 
-export default function SportList({
-  sports,
-  onChangeSport,
-  onDeleteSport
-}) {
+export default function SportList() {
+  const sports = useSports();
+
   return (
     <ul>
       {sports.map(sport => (
         <li key={sport.id}>
-          <Sport
-            sport={sport}
-            onChange={onChangeSport}
-            onDelete={onDeleteSport}
-          />
+          <Sport sport={sport} />
         </li>
       ))}
     </ul>
   );
 }
 
-function Sport({ sport, onChange, onDelete }) {
+function Sport({ sport }) {
   const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useSportsDispatch();
   let sportContent;
   if (isEditing) {
     sportContent = (
@@ -29,18 +25,24 @@ function Sport({ sport, onChange, onDelete }) {
         <input
           value={sport.name}
           onChange={e => {
-            onChange({
-              ...sport,
-              name: e.target.value
+            dispatch({
+              type: 'changed',
+              sport: {
+                ...sport,
+                name: e.target.value
+              }
             });
           }} />
           <input
           type='text'
           value={sport.description}
           onChange={e => {
-            onChange({
-              ...sport,
-              description: e.target.value
+            dispatch({
+              type: 'changed',
+              sport: {
+                ...sport,
+                description: e.target.value
+              }
             });
           }} />
         <button onClick={() => setIsEditing(false)}>
@@ -51,11 +53,11 @@ function Sport({ sport, onChange, onDelete }) {
   } else {
     sportContent = (
       <>
-          <h2>{sport.name}</h2>
-          <p>
-            {sport.description}
-          </p>
-          <button onClick={() => setIsEditing(true)}>
+        <h2>{sport.name}</h2>
+        <p>
+          {sport.description}
+        </p>
+        <button onClick={() => setIsEditing(true)}>
           Edit
         </button>
       </>
@@ -65,7 +67,12 @@ function Sport({ sport, onChange, onDelete }) {
   return (
     <label>
       {sportContent}
-      <button onClick={() => onDelete(sport.id)}>
+      <button onClick={() => dispatch(
+        {
+          type: 'deleted',
+          id: sport.id
+        }
+      )}>
         Delete
       </button>
     </label>

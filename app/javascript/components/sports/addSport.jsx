@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useSports, useSportsDispatch } from '../../contexts/sports';
 
-export default function AddSport({ onAddSport }) {
+export default function AddSport() {
+  const dispatch = useSportsDispatch();
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+
+  let nextId = useSports().length + 1;
   return (
     <>
       <input
@@ -19,7 +24,13 @@ export default function AddSport({ onAddSport }) {
       <button onClick={() => {
         setName('');
         setDescription('');
-        onAddSport({name, description});
+        dispatch({
+          type: 'added',
+          id: nextId++,
+          name: name,
+          description: description,
+          status: 'public'
+        });
       }}>Add</button>
     </>
   )
