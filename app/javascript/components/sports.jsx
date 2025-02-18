@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import SportUpdate from "./sports/update";
+import React, { useReducer } from "react";
+import sportsReducer from "../reducers/sports";
+import AddSport from "./sports/addSport";
+import SportList from "./sports/sportList";
+
 
 export default function Sports(){
+  let nextId = 3;
   const initialSportList = [
     {
       id: 1,
@@ -17,26 +21,45 @@ export default function Sports(){
     },
   ]
 
-  const [sportList, setSportList] = useState(initialSportList);
+  function handleAddSport({name, description}) {
+    dispatch({
+      type: 'added',
+      id: nextId++,
+      name: name,
+      description: description
+    });
+  }
 
-  const listItems = sportList.map(sport =>
-    <li key={sport.id}>
-      <h2>{sport.name}</h2>
-      <p>
-        {sport.description}
-      </p>
-      <SportUpdate sportInit={sport} />
-    </li>
-  );
+  function handleChangeSport(sport){
+    dispatch({
+      type: 'changed',
+      sport: sport,
+    });
+  }
 
-  return(
+  function handleDeleteSport(sportId){
+    dispatch({
+      type: 'deleted',
+      id: sportId,
+    });
+  }
+
+  const [sports, dispatch] = useReducer(sportsReducer, initialSportList);
+
+  return (
     <>
-    <h1>List of sports</h1>
-    <ul>{listItems}</ul>
+      <h1>Sports' list</h1>
+      <AddSport
+        onAddSport={handleAddSport}
+      />
+      <SportList
+        sports={sports}
+        onChangeSport={handleChangeSport}
+        onDeleteSport={handleDeleteSport}
+      />
     </>
-  )
-
-  // <SportCreate sportList={sportList} setSportList={setSportList} />
+  );
 }
+
 
 
