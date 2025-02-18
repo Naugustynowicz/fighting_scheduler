@@ -25,4 +25,8 @@ Rails.application.routes.draw do
   resources :teams
   resources :type_events
   resources :users
+
+  get "ui", action: :index, controller: "articles"
+  get "ui/sports", action: :index, controller: "articles"
+  get "ui/events", action: :index, controller: "articles"
 end
