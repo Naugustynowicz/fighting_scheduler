@@ -33,7 +33,7 @@ module BasicDatabaseFunctions
     data = database.find(params[:id])
 
     if data.update(request_params)
-      render json: data, status: :updated
+      render json: data
     else
       render json: data.errors, status: :unprocessable_entity
     end

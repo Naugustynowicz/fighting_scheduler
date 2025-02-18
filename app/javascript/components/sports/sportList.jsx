@@ -45,7 +45,15 @@ function Sport({ sport }) {
               }
             });
           }} />
-        <button onClick={() => setIsEditing(false)}>
+        <button onClick={() => {
+          dispatch({
+            type: 'commitChanges',
+            id: sport.id,
+            name: sport.name,
+            description: sport.description
+          });
+          setIsEditing(false)
+        }}>
           Save
         </button>
       </>
@@ -57,7 +65,9 @@ function Sport({ sport }) {
         <p>
           {sport.description}
         </p>
-        <button onClick={() => setIsEditing(true)}>
+        <button onClick={() => {
+          setIsEditing(true)
+        }}>
           Edit
         </button>
       </>

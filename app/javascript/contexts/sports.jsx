@@ -84,17 +84,9 @@ function sportsReducer(sports, action) {
 
       fetch('http://localhost:3000/sports', { 
         method: 'POST', 
-        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': ''},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSport)
       });
-
-      // alternative
-      // post(('http://localhost:3000/sports', {
-      //   id: action.id,
-      //   name: action.name,
-      //   description: action.description,
-      //   status: 'public'
-      // }));
 
       return [
         ...sports,
@@ -109,18 +101,23 @@ function sportsReducer(sports, action) {
     case 'changed': {
       return sports.map((sport) => {
         if (sport.id === action.sport.id) {
-          // fetch('http://localhost:3000/sports', { method: 'PATCH', body: {
-          //   id: action.id,
-          //   name: action.name,
-          //   description: action.description,
-          //   status: 'public'
-          // } });
-
           return action.sport;
         } else {
           return sport;
         }
       });
+    }
+    case 'commitChanges': {
+      let changedSport = { sport: {
+        name: action.name,
+        description: action.description
+      }}
+      fetch(`http://localhost:3000/sports/${action.id}`, { 
+        method: 'PATCH', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(changedSport)
+      });
+      return sports;
     }
     case 'deleted': {
       fetch(`http://localhost:3000/sports/${action.id}`, { method: 'DELETE'} );
