@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 export const SportsContext = createContext(null);
 export const SportsDispatchContext = createContext(null);
 
-const initialSports = [
+let initialSports = [
   {
     id: 1,
     name: 'Sport1',
@@ -20,6 +20,38 @@ const initialSports = [
 
 export function SportsProvider({ children }){
   const [sports, dispatch] = useReducer(sportsReducer, initialSports);
+
+  // WIP
+  // useEffect(() => {
+  //   let ignore = false;
+  // 
+  //   async function startFetching() {
+  //     const json = await fetch('http://localhost:3000/sports');
+  //     if (!ignore) {
+  //       // setTodos(json);
+  //     }
+  //   }
+  // 
+  //   startFetching();
+  // 
+  //   return () => {
+  //     ignore = true;
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    let ignore = false;
+    fetch('http://localhost:3000/sports')
+      .then(response => response.json())
+      .then(
+        json => {
+          if(!ignore){
+            dispatch({type: 'fetched', sports: json})
+          }
+        }
+      )
+    return () => ignore = true;
+  }, [])
 
   return(
     <SportsContext.Provider value={sports}>
@@ -40,7 +72,25 @@ export function useSportsDispatch() {
 
 function sportsReducer(sports, action) {
   switch (action.type) {
+    case 'fetched': {
+      return [...action.sports];
+    }
     case 'added': {
+      // fetch('http://localhost:3000/sports', { method: 'POST', body: {
+      //   id: action.id,
+      //   name: action.name,
+      //   description: action.description,
+      //   status: 'public'
+      // } });
+      //
+      // // alternative
+      // post(('http://localhost:3000/sports', {
+      //   id: action.id,
+      //   name: action.name,
+      //   description: action.description,
+      //   status: 'public'
+      // })
+
       return [
         ...sports,
         {
@@ -54,6 +104,13 @@ function sportsReducer(sports, action) {
     case 'changed': {
       return sports.map((sport) => {
         if (sport.id === action.sport.id) {
+          // fetch('http://localhost:3000/sports', { method: 'PATCH', body: {
+          //   id: action.id,
+          //   name: action.name,
+          //   description: action.description,
+          //   status: 'public'
+          // } });
+
           return action.sport;
         } else {
           return sport;
@@ -61,6 +118,10 @@ function sportsReducer(sports, action) {
       });
     }
     case 'deleted': {
+      // fetch('http://localhost:3000/sports', { method: 'DELETE', body: {
+      //   id: action.id
+      // } });
+
       return sports.filter((sport) => sport.id !== action.id);
     } 
     default: {
