@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_19_154608) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -83,10 +83,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "circuit_id"
     t.integer "status_id"
     t.integer "location_id"
     t.integer "sport_id"
     t.integer "type_event_id"
+    t.index ["circuit_id"], name: "index_events_on_circuit_id"
     t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["sport_id"], name: "index_events_on_sport_id"
     t.index ["status_id"], name: "index_events_on_status_id"
@@ -101,11 +103,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "events_teams", id: false, force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.integer "event_id", null: false
+    t.integer "circuit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circuit_id"], name: "index_events_teams_on_circuit_id"
+  end
+
   create_table "events_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "event_id", null: false
+    t.integer "circuit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["circuit_id"], name: "index_events_users_on_circuit_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -117,6 +130,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "user1_id", null: false
+    t.integer "user2_id", null: false
+    t.integer "winner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_matches_on_event_id"
+    t.index ["user1_id"], name: "index_matches_on_user1_id"
+    t.index ["user2_id"], name: "index_matches_on_user2_id"
+    t.index ["winner_id"], name: "index_matches_on_winner_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -153,18 +179,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
     t.index ["club_id"], name: "index_teams_on_club_id"
   end
 
-  create_table "teams_events_circuits", id: false, force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "event_id"
-    t.integer "circuit_id"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["circuit_id"], name: "index_teams_events_circuits_on_circuit_id"
-    t.index ["event_id"], name: "index_teams_events_circuits_on_event_id"
-    t.index ["team_id"], name: "index_teams_events_circuits_on_team_id"
-  end
-
   create_table "type_events", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -193,18 +207,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
     t.index ["team_id"], name: "index_users_on_team_id"
   end
 
-  create_table "users_events_circuits", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "event_id"
-    t.integer "circuit_id"
-    t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["circuit_id"], name: "index_users_events_circuits_on_circuit_id"
-    t.index ["event_id"], name: "index_users_events_circuits_on_event_id"
-    t.index ["user_id"], name: "index_users_events_circuits_on_user_id"
-  end
-
   add_foreign_key "circuits", "statuses"
   add_foreign_key "circuits", "users"
   add_foreign_key "clubs", "locations"
@@ -212,11 +214,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
   add_foreign_key "clubs", "statuses"
   add_foreign_key "clubs", "users"
   add_foreign_key "comments", "articles"
+  add_foreign_key "events", "circuits"
   add_foreign_key "events", "locations"
   add_foreign_key "events", "sports"
   add_foreign_key "events", "statuses"
   add_foreign_key "events", "type_events"
   add_foreign_key "events", "users"
+  add_foreign_key "events_teams", "circuits"
+  add_foreign_key "events_users", "circuits"
+  add_foreign_key "matches", "events"
+  add_foreign_key "matches", "users", column: "user1_id"
+  add_foreign_key "matches", "users", column: "user2_id"
+  add_foreign_key "matches", "users", column: "winner_id"
   add_foreign_key "teams", "clubs"
   add_foreign_key "users", "clubs"
   add_foreign_key "users", "locations"

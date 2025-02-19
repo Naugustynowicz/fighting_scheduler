@@ -7,4 +7,3 @@ location1:
   city: CityName1
   postal_code: '12345'
   country: CountryName1
-  status: public

@@ -18,23 +18,13 @@ class CreateJoinTables < ActiveRecord::Migration[8.0]
 
     # event attendees
     create_join_table :users, :events do |t|
-      t.timestamps
-    end
-
-    create_table :users_events_circuits, id: false do |t|
-      t.references :user
-      t.references :event
-      t.references :circuit
-      t.integer :score
+      t.references :circuit, null: true, foreign_key: true
 
       t.timestamps
     end
 
-    create_table :teams_events_circuits, id: false do |t|
-      t.references :team
-      t.references :event
-      t.references :circuit
-      t.integer :score
+    create_join_table :teams, :events do |t|
+      t.references :circuit, null: true, foreign_key: true
 
       t.timestamps
     end

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :events
-
+  has_many :events # as organizator
+  has_and_belongs_to_many :events # as attendee
   has_and_belongs_to_many :roles
 end
