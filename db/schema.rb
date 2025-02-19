@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_26_160453) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_19_102112) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -204,8 +204,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_26_160453) do
     t.integer "club_id"
     t.integer "team_id"
     t.integer "location_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["club_id"], name: "index_users_on_club_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["location_id"], name: "index_users_on_location_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["team_id"], name: "index_users_on_team_id"
   end
 
