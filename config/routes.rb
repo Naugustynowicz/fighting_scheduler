@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "articles#index"
+  root "application#index"
+
+  # define rails paths
   resources :articles do
     resources :comments
   end
@@ -27,7 +29,8 @@ Rails.application.routes.draw do
   resources :type_events
   resources :users
 
-  get "ui", action: :index, controller: "articles"
-  get "ui/sports", action: :index, controller: "articles"
-  get "ui/events", action: :index, controller: "articles"
+  # define user interface paths here
+  get "ui", action: :index, controller: "application"
+  get "ui/sports", action: :index, controller: "application"
+  get "ui/events", action: :index, controller: "application"
 end

@@ -9,6 +9,6 @@ class SportsController < ApplicationController
   end
 
   def request_params
-    params.expect(sport: [ :name, :description, :status ])
+    params.expect(sport: [ :name, :description ])
   end
 end

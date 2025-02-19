@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_19_102112) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_19_103502) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -69,26 +69,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_102112) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
-  create_table "evenements", force: :cascade do |t|
-    t.string "type_event"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.integer "attendees_nb"
-    t.decimal "venue_fee"
-    t.string "status"
-    t.string "name"
-    t.text "description"
-    t.text "rules"
-    t.text "schedule"
-    t.text "brackets"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "locations_id", null: false
-    t.integer "sports_id", null: false
-    t.index ["locations_id"], name: "index_evenements_on_locations_id"
-    t.index ["sports_id"], name: "index_evenements_on_sports_id"
-  end
-
   create_table "events", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
@@ -135,7 +115,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_102112) do
     t.string "city"
     t.string "postal_code"
     t.string "country"
-    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -156,7 +135,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_102112) do
   create_table "sports", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -195,7 +173,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_102112) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "password"
     t.string "other"
     t.string "position"
     t.boolean "first_team"
@@ -235,8 +212,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_102112) do
   add_foreign_key "clubs", "statuses"
   add_foreign_key "clubs", "users"
   add_foreign_key "comments", "articles"
-  add_foreign_key "evenements", "locations", column: "locations_id"
-  add_foreign_key "evenements", "sports", column: "sports_id"
   add_foreign_key "events", "locations"
   add_foreign_key "events", "sports"
   add_foreign_key "events", "statuses"

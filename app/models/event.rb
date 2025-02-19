@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   # WIP (content)
-  # has_many :users
+  has_many :users
   has_many :matches
 
   def generate_bracket!

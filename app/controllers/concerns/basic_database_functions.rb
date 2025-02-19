@@ -6,6 +6,8 @@ module BasicDatabaseFunctions
 
   def show
     data = database.find(params[:id])
+    authorize data
+
     render json: data
   end
 
@@ -31,6 +33,7 @@ module BasicDatabaseFunctions
 
   def update
     data = database.find(params[:id])
+    authorize data
 
     if data.update(request_params)
       render json: data
