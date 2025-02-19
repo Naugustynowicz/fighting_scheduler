@@ -103,8 +103,6 @@ export default function AddEvent() {
         onChange={e => setTypeEventId(e.target.value)}
       />
       <button onClick={() => {
-        setName('');
-        setDescription('');
         dispatch({
           type: 'added',
           id: nextId++,

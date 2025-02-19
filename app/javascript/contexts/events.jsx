@@ -59,26 +59,48 @@ export function useEventsDispatch() {
 function eventsReducer(events, action) {
   switch (action.type) {
     case 'fetched': {
-      return [...action.events];
+      let fetchedEvents = action.events.map((fetchedEvent) => {
+        return (
+          {
+            id: fetchedEvent.id,
+            startDate: fetchedEvent.start_date,
+            endDate: fetchedEvent.end_date,
+            attendeesNb: fetchedEvent.attendees_nb,
+            venueFee: fetchedEvent.venue_fee,
+            requiredScore: fetchedEvent.required_score,
+            name: fetchedEvent.name,
+            description: fetchedEvent.description,
+            rules: fetchedEvent.rules,
+            schedule: fetchedEvent.schedule,
+            brackets: fetchedEvent.brackets,
+            userId: fetchedEvent.user_id,
+            statusId: fetchedEvent.status_id,
+            locationId: fetchedEvent.location_id,
+            sportId: fetchedEvent.sport_id,
+            typeEventId: fetchedEvent.typeEvent_id
+          }
+        )
+      })
+      return [...fetchedEvents];
     }
     case 'added': {
       let newEvent = {
-        "event": {
-          "startDate": action.startDate,
-          "endDate": action.endDate,
-          "attendeesNb": action.attendeesNb,
-          "venueFee": action.venueFee,
-          "requiredScore": action.requiredScore,
-          "name": action.name,
-          "description": action.description,
-          "rules": action.rules,
-          "schedule": action.schedule,
-          "brackets": action.brackets,
-          "userId": action.userId,
-          "statusId": action.statusId,
-          "locationId": action.locationId,
-          "sportId": action.sportId,
-          "typeEventId": action.typeEventId
+        event: {
+          start_date: action.startDate,
+          end_date: action.endDate,
+          attendees_nb: action.attendeesNb,
+          venue_fee: action.venueFee,
+          required_score: action.requiredScore,
+          name: action.name,
+          description: action.description,
+          rules: action.rules,
+          schedule: action.schedule,
+          brackets: action.brackets,
+          user_id: action.userId,
+          status_d: action.statusId,
+          location_id: action.locationId,
+          sport_id: action.sportId,
+          typeEvent_id: action.typeEventId
         }
       }
 
@@ -122,21 +144,21 @@ function eventsReducer(events, action) {
     case 'commitChanges': {
       let changedEvent = { event: {
         id: action.id,
-          startDate: action.startDate,
-          endDate: action.endDate,
-          attendeesNb: action.attendeesNb,
-          venueFee: action.venueFee,
-          requiredScore: action.requiredScore,
+          start_date: action.startDate,
+          end_date: action.endDate,
+          attendees_nb: action.attendeesNb,
+          venue_fee: action.venueFee,
+          required_score: action.requiredScore,
           name: action.name,
           description: action.description,
           rules: action.rules,
           schedule: action.schedule,
           brackets: action.brackets,
-          userId: action.userId,
-          statusId: action.statusId,
-          locationId: action.locationId,
-          sportId: action.sportId,
-          typeEventId: action.typeEventId
+          user_id: action.userId,
+          status_id: action.statusId,
+          location_id: action.locationId,
+          sport_id: action.sportId,
+          typeEvent_id: action.typeEventId
       }}
       fetch(`http://localhost:3000/events/${action.id}`, { 
         method: 'PATCH', 
