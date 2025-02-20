@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :evenements
   resources :events do
     member do
-      get "subscribe"
+      get :subscribe
     end
   end
   resources :locations
