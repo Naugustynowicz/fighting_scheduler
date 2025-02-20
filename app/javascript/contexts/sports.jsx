@@ -21,24 +21,6 @@ let initialSports = [
 export function SportsProvider({ children }){
   const [sports, dispatch] = useReducer(sportsReducer, initialSports);
 
-  // WIP
-  // useEffect(() => {
-  //   let ignore = false;
-  // 
-  //   async function startFetching() {
-  //     const json = await fetch('http://localhost:3000/sports');
-  //     if (!ignore) {
-  //       // setTodos(json);
-  //     }
-  //   }
-  // 
-  //   startFetching();
-  // 
-  //   return () => {
-  //     ignore = true;
-  //   };
-  // }, []);
-
   useEffect(() => {
     let ignore = false;
     fetch('http://localhost:3000/sports')

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :events do
     member do
       get :subscribe
+      get :attendees
     end
   end
   resources :locations

@@ -2,6 +2,19 @@ class EventsController < ApplicationController
   include Identification
   include BasicDatabaseFunctions
 
+  def subscribe
+    @event = database.find(params[:id])
+    @event.subscribe(current_user)
+
+    render json: @event.users
+  end
+
+  def attendees
+    @event = database.find(params[:id])
+
+    render json: @event.users
+  end
+
   private
 
   def database

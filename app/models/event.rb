@@ -7,6 +7,8 @@ class Event < ApplicationRecord
   attr_reader :current_round_matches
 
   def subscribe(user)
+    return if users.include? user
+
     self.users.push user
   end
 

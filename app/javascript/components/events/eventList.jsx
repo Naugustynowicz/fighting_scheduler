@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEvents, useEventsDispatch } from '../../contexts/events';
+import Attendees from './attendees';
 
 export default function EventList() {
   const events = useEvents();
@@ -262,6 +263,7 @@ function Event({ event }) {
   return (
     <label>
       {eventContent}
+      <Attendees event_id={event.id} />
       <button onClick={() => dispatch(
         {
           type: 'subscribed',
