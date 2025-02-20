@@ -172,6 +172,11 @@ function eventsReducer(events, action) {
 
       return events.filter((event) => event.id !== action.id);
     } 
+    case 'subscribed': {
+      fetch(`http://localhost:3000/events/${action.id}/subscribe`);
+
+      return events;
+    } 
     default: {
       throw Error('Unknown action: ' + action.type);
     }

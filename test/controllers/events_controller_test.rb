@@ -1,13 +1,13 @@
 require "test_helper"
 
-class EventsControllerTest < ActionController::TestCase
+class EventsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   test "can subscribe to an event" do
     user = users :bob
     event = events :simple_tournament
 
     sign_in user
-    event.subscribe
+    get "/events/#{event.id}/subscribe"
 
     debugger
   end

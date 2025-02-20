@@ -264,6 +264,14 @@ function Event({ event }) {
       {eventContent}
       <button onClick={() => dispatch(
         {
+          type: 'subscribed',
+          id: event.id
+        }
+      )}>
+        Subscribe
+      </button>
+      <button onClick={() => dispatch(
+        {
           type: 'deleted',
           id: event.id
         }

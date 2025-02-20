@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   resources :circuits
   resources :clubs
   resources :evenements
-  resources :events
+  resources :events do
+    member do
+      get "subscribe"
+    end
+  end
   resources :locations
   resources :roles
   resources :sports

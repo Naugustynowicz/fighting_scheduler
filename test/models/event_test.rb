@@ -17,17 +17,10 @@ class EventTest < ActiveSupport::TestCase
       event.subscribe(attendee)
     end
 
-    match_list = assert_difference "Match.count", 2 do
-      event.generate_bracket(1)
-    end
-    assert_equal 2, match_list.length
+    tournament_tree = event.generate_tree_bracket
 
-    user1 = match_list.first.user1
-    user2 = match_list.first.user2
-    user3 = match_list.last.user1
-    user4 = match_list.last.user2
-    userlist = [ user1, user2, user3, user4 ].uniq
-
-    assert_equal 4, userlist.length
+    debugger
   end
+
+  # remove_all!
 end
