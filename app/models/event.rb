@@ -15,6 +15,7 @@ class Event < ApplicationRecord
   def generate_bracket
     shuffled_users = users.shuffle
 
+    Match.where(event: self).each(&:destroy)
     shuffled_users.each_slice(2) do |user1, user2|
       Match.create!(event: self, user1:, user2:)
     end
@@ -28,7 +29,7 @@ class Event < ApplicationRecord
     root_node = Tree::TreeNode.new("ROOT", "Root Content")
     @current_round_matches = []
     generate_tree(first_round_match_list, root_node)
-    root_node
+    root_node.to_json
   end
 
   def generate_tree(array, node)

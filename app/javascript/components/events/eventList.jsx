@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEvents, useEventsDispatch } from '../../contexts/events';
 import Attendees from './attendees';
+import TreeBracket from './treeBracket';
 
 export default function EventList() {
   const events = useEvents();
@@ -264,6 +265,7 @@ function Event({ event }) {
     <label>
       {eventContent}
       <Attendees event_id={event.id} />
+      <TreeBracket event_id={event.id} />
       <button onClick={() => dispatch(
         {
           type: 'subscribed',

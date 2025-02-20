@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     member do
       get :subscribe
       get :attendees
+      get :generate_tree_bracket
     end
   end
   resources :locations

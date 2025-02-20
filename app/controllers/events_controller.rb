@@ -3,16 +3,21 @@ class EventsController < ApplicationController
   include BasicDatabaseFunctions
 
   def subscribe
-    @event = database.find(params[:id])
-    @event.subscribe(current_user)
+    event = database.find(params[:id])
+    event.subscribe(current_user)
 
-    render json: @event.users
+    render json: event.users
   end
 
   def attendees
-    @event = database.find(params[:id])
+    event = database.find(params[:id])
 
-    render json: @event.users
+    render json: event.users
+  end
+
+  def generate_tree_bracket
+    event = database.find(params[:id])
+    render json: event.generate_tree_bracket
   end
 
   private
