@@ -29,7 +29,7 @@ export function EventsProvider({ children }){
 
   useEffect(() => {
     let ignore = false;
-    fetch('http://localhost:3000/events')
+    fetch('http://localhost:3000/events', { headers: {'X-CSRF-Token': ''}})
     .then(response => response.json())
     .then(json => {
       if(!ignore){

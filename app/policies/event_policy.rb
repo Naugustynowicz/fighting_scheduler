@@ -8,6 +8,10 @@ class EventPolicy < ApplicationPolicy
     @event = event
   end
 
+  def show?
+    true
+  end
+
   def subscribe?
     show?
   end

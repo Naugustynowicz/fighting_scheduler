@@ -15,11 +15,11 @@ class AddDeviseToUsers < ActiveRecord::Migration[8.0]
       t.datetime :remember_created_at
 
       ## Trackable
-      # t.integer  :sign_in_count, default: 0, null: false
-      # t.datetime :current_sign_in_at
-      # t.datetime :last_sign_in_at
-      # t.string   :current_sign_in_ip
-      # t.string   :last_sign_in_ip
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
 
       ## Confirmable
       # t.string   :confirmation_token
@@ -47,15 +47,27 @@ class AddDeviseToUsers < ActiveRecord::Migration[8.0]
     # By default, we don't want to make any assumption about how to roll back a migration when your
     # model already existed. Please edit below which fields you would like to remove in this migration.
     # raise ActiveRecord::IrreversibleMigration
+
+    ## Database authenticatable
     remove_column :users, :email,              null: false, default: ""
     remove_column :users, :encrypted_password, null: false, default: ""
 
+    ## Recoverable
     remove_column :users, :reset_password_token
     remove_column :users, :reset_password_sent_at
 
+    ## Rememberable
     remove_column :users, :remember_created_at
 
-    remove_index :users, :email,                unique: true
-    remove_index :users, :reset_password_token, unique: true
+    ## Trackable
+    remove_column :users, :sign_in_count, default: 0, null: false
+    remove_column :users, :current_sign_in_at
+    remove_column :users, :last_sign_in_at
+    remove_column :users, :current_sign_in_ip
+    remove_column :users, :last_sign_in_ip
+
+    ## index
+    # remove_index :users, :email              #  unique: true
+    # remove_index :users, :reset_password_token# , unique: true
   end
 end

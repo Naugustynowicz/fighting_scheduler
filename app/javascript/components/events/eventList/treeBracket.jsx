@@ -8,7 +8,7 @@ export default function TreeBracket({event_id}) {
 
   useEffect(() => {
       let ignore = false;
-      fetch(`http://localhost:3000/events/${const_event_id}/generate_tree_bracket`)
+      fetch(`http://localhost:3000/events/${const_event_id}/generate_tree_bracket`, {headers : {'X-CSRF-Token': ''}})
       .then(response => response.json())
       .then(json => {
         if(!ignore){

@@ -11,7 +11,8 @@ relire site (faute d'ortho)
 Fonctionnalité finie et sécurisée
 faire le css, revoir structure du front
 passer rapidement sur le diagramme des cas d'utilisations
-mots clées sur les slides (au début principalement)
+mettre mots clées sur les slides
+ne pas s'attarder sur les bugs, enchainer direct
 
 presenter une fonctionnalité de l'affichage au back
 check comment est défini la base en ruby
@@ -20,6 +21,7 @@ identification?
 voir pour récupérer un schéma de la bdd
 bdd != tables ( attention au vocabulaire)
 préparer/répéter sénario démo
+application responsive
 
 retirer les tables intermédiaire du MCD, si champ qui y est défini, le mettre dans la pattate séparé du nom par un trait horizontale.
 
