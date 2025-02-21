@@ -56,6 +56,9 @@ Rails.application.configure do
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
+  # Controls the action to be taken when an SQL query produces a warning. Here config to be logged.
+  config.active_record.db_warnings_action = :log
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
