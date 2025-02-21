@@ -8,7 +8,7 @@ class ClubPolicy < ApplicationPolicy
     @club = club
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

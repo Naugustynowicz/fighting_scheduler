@@ -8,7 +8,7 @@ class StatusPolicy < ApplicationPolicy
     @status = status
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

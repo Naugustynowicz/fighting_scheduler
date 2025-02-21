@@ -8,7 +8,7 @@ class UserPolicy < ApplicationPolicy
     @requested_user = requested_user
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

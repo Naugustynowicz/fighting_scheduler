@@ -8,7 +8,7 @@ class TeamPolicy < ApplicationPolicy
     @team = team
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

@@ -8,7 +8,7 @@ class SportPolicy < ApplicationPolicy
     @sport = sport
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

@@ -8,7 +8,7 @@ class LocationPolicy < ApplicationPolicy
     @location = location
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

@@ -4,26 +4,26 @@ module BasicDatabasePolicy
   end
 
   def show?
-    true
+    user&.roles&.any? { |role| role.name.eql? "admin" }
   end
 
   def new?
-    true
+    create?
   end
 
   def create?
-    true
+    user&.roles&.any? { |role| role.name.eql? "admin" }
   end
 
   def edit?
-    true
+    update?
   end
 
   def update?
-    user.roles.any? { |role| role.name.eql? "admin" }
+    user&.roles&.any? { |role| role.name.eql? "admin" }
   end
 
   def destroy?
-    true
+    user&.roles&.any? { |role| role.name.eql? "admin" }
   end
 end

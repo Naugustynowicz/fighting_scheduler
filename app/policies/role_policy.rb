@@ -8,7 +8,7 @@ class RolePolicy < ApplicationPolicy
     @role = role
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

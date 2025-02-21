@@ -8,7 +8,7 @@ class CircuitPolicy < ApplicationPolicy
     @circuit = circuit
   end
 
-  def update?
-    true
-  end
+  # def update?
+  #   true
+  # end
 end

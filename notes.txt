@@ -2,3 +2,18 @@ docker compose up --build
 docker compose watch
 
 sudo docker exec -it fighting_scheduler-web-1 bundle exec rake db:migrate RAILS_ENV=test
+
+
+# pour la soutenance
+'Du coup'
+être précis pour la présentation
+relire site (faute d'ortho)
+Fonctionnalité finie et sécurisée
+faire le css, revoir structure du front
+
+presenter une fonctionnalité de l'affichage au back
+check comment est défini la base en ruby
+identification?
+voir pour récupérer un schéma de la bdd
+bdd != tables ( attention au vocabulaire)
+
