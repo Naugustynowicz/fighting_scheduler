@@ -42,4 +42,4 @@ node_modules
 *.local
 
 # ignore local notes
-notes.txt
+/notes.txt
