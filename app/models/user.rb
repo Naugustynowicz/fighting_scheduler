@@ -1,10 +1,11 @@
 class User < ApplicationRecord
   class UndefinedDefaultRole < StandardError; end
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :trackable
+  # # -- devise & pundit part --
+  # # Include default devise modules. Others available are:
+  # # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :validatable,
+  #        :trackable
 
   has_and_belongs_to_many :roles
   # enum role: [:user, :vip, :admin]

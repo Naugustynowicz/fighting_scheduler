@@ -19,8 +19,9 @@ Role.find_or_create_by!(name: 'athlete')
 # puts 'CREATED ADMIN USER: ' << user.email
 User.find_or_create_by!(email: 'admin@email.com') do |user|
   user.name = 'Admin'
-  user.password = 'admin_password'
-  user.password_confirmation = 'admin_password'
+  # # -- devise & pundit part --
+  # user.password = 'admin_password'
+  # user.password_confirmation = 'admin_password'
   user.update_attribute(:roles, user.roles.push(Role.find_by(name: 'admin')))
 end
 
@@ -33,8 +34,9 @@ Event.find_or_create_by!(name: 'Event2', description: 'This is an event')
 8.times do |i|
   user = User.find_or_create_by!(email: "athlete#{i}@test.com") do |user|
     user.name = "athlete#{i}"
-    user.password = "athlete#{i}"
-    user.password_confirmation = "athlete#{i}"
+    # # -- devise & pundit part --
+    # user.password = "athlete#{i}"
+    # user.password_confirmation = "athlete#{i}"
     user.update_attribute(:roles, user.roles.push(Role.find_by(name: 'athlete')))
   end
 

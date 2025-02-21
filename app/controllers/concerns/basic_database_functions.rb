@@ -1,28 +1,28 @@
 module BasicDatabaseFunctions
   def index
     datas = database.all
-    authorize datas
+    # authorize datas
 
     render json: datas
   end
 
   def show
     data = database.find(params[:id])
-    authorize data
+    # authorize data
 
     render json: data
   end
 
   def new
     data = database.new
-    authorize data
+    # authorize data
 
     render json: data
   end
 
   def create
     data = database.new(request_params)
-    authorize data
+    # authorize data
 
     if data.save
       render json: data, status: :created
@@ -33,14 +33,14 @@ module BasicDatabaseFunctions
 
   def edit
     data = database.find(params[:id])
-    authorize data
+    # authorize data
 
     render json: data
   end
 
   def update
     data = database.find(params[:id])
-    authorize data
+    # authorize data
 
     if data.update(request_params)
       render json: data
@@ -51,7 +51,7 @@ module BasicDatabaseFunctions
 
   def destroy
     data = database.find(params[:id])
-    authorize data
+    # authorize data
 
     data.destroy
 

@@ -1,4 +1,4 @@
-class AddMathcModel < ActiveRecord::Migration[8.0]
+class AddMatchModel < ActiveRecord::Migration[8.0]
   def change
     create_table :matches do |t|
       t.references :event, null: false, foreign_key: true

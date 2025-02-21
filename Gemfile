@@ -38,9 +38,9 @@ gem "bootsnap", require: false
 gem "vite_rails"
 
 # Authentification gem
-gem "devise"
+# gem "devise"
 # Authorization gem
-gem "pundit"
+# gem "pundit"
 
 gem "rubytree"
 
