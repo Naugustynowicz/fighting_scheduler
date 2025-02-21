@@ -23,7 +23,7 @@ export default function Attendees({event_id}) {
 
   useEffect(() => {
       let ignore = false;
-      fetch(`http://localhost:3000/events/${const_event_id}/attendees`, {headers : {'X-CSRF-Token': ''}})
+      fetch(`http://localhost:3000/events/${const_event_id}/attendees`)
       .then(response => response.json())
       .then(json => {
         if(!ignore){

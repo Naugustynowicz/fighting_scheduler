@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import CSRFToken from '../components/cookies';
 
 export const SportsContext = createContext(null);
 export const SportsDispatchContext = createContext(null);
@@ -66,7 +67,7 @@ function sportsReducer(sports, action) {
 
       fetch('http://localhost:3000/sports', { 
         method: 'POST', 
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', "X-CSRF-Token": CSRFToken(document.cookie) },
         body: JSON.stringify(newSport)
       });
 
@@ -96,13 +97,13 @@ function sportsReducer(sports, action) {
       }}
       fetch(`http://localhost:3000/sports/${action.id}`, { 
         method: 'PATCH', 
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', "X-CSRF-Token": CSRFToken(document.cookie) },
         body: JSON.stringify(changedSport)
       });
       return sports;
     }
     case 'deleted': {
-      fetch(`http://localhost:3000/sports/${action.id}`, { method: 'DELETE'} );
+      fetch(`http://localhost:3000/sports/${action.id}`, { method: 'DELETE', headers: {"X-CSRF-Token": CSRFToken(document.cookie)}} );
 
       return sports.filter((sport) => sport.id !== action.id);
     } 

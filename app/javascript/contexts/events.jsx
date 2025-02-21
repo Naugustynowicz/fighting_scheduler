@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import CSRFToken from '../components/cookies';
 
 export const EventsContext = createContext(null);
 export const EventsDispatchContext = createContext(null);
@@ -29,7 +30,7 @@ export function EventsProvider({ children }){
 
   useEffect(() => {
     let ignore = false;
-    fetch('http://localhost:3000/events', { headers: {'X-CSRF-Token': ''}})
+    fetch('http://localhost:3000/events')
     .then(response => response.json())
     .then(json => {
       if(!ignore){
@@ -106,7 +107,7 @@ function eventsReducer(events, action) {
 
       fetch('http://localhost:3000/events', { 
         method: 'POST', 
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', "X-CSRF-Token": CSRFToken(document.cookie) },
         body: JSON.stringify(newEvent)
       });
 
@@ -162,13 +163,13 @@ function eventsReducer(events, action) {
       }}
       fetch(`http://localhost:3000/events/${action.id}`, { 
         method: 'PATCH', 
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', "X-CSRF-Token": CSRFToken(document.cookie) },
         body: JSON.stringify(changedEvent)
       });
       return events;
     }
     case 'deleted': {
-      fetch(`http://localhost:3000/events/${action.id}`, { method: 'DELETE'} );
+      fetch(`http://localhost:3000/events/${action.id}`, { method: 'DELETE', headers: { "X-CSRF-Token": CSRFToken(document.cookie) }});
 
       return events.filter((event) => event.id !== action.id);
     } 
