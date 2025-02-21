@@ -8,8 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# user = CreateAdminService.new.call
-# puts 'CREATED ADMIN USER: ' << user.email
 Role.find_or_create_by!(name: 'admin')
 Role.find_or_create_by!(name: 'event_orga')
 Role.find_or_create_by!(name: 'circuit_orga')
@@ -17,6 +15,8 @@ Role.find_or_create_by!(name: 'trainer')
 Role.find_or_create_by!(name: 'athlete')
 
 # WIP
+# user = CreateAdminService.new.call
+# puts 'CREATED ADMIN USER: ' << user.email
 User.find_or_create_by!(email: 'admin@email.com') do |user|
   user.name = 'Admin'
   user.password = 'admin_password'
