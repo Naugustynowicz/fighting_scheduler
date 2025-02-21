@@ -13,7 +13,10 @@ faire le css, revoir structure du front
 
 presenter une fonctionnalité de l'affichage au back
 check comment est défini la base en ruby
+check gestion sécurité
 identification?
 voir pour récupérer un schéma de la bdd
 bdd != tables ( attention au vocabulaire)
+
+retirer les tables intermédiaire du MCD, si champ qui y est défini, le mettre dans la pattate séparé du nom par un trait horizontale.
 
