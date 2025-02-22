@@ -3,9 +3,8 @@ class Match < ApplicationRecord
   belongs_to :user1, class_name: "User", optional: true
   belongs_to :user2, class_name: "User", optional: true
   belongs_to :winner, class_name: "User", optional: true
-  belongs_to :previous_match_1, class_name: "Match", optional: true
-  belongs_to :previous_match_2, class_name: "Match", optional: true
-  # has_many :matches
+  # belongs_to :previous_match_1, class_name: "Match", optional: true
+  # belongs_to :previous_match_2, class_name: "Match", optional: true
 
   # attr_reader :previous_match_1, :previous_match_2
   # attr_reader :user1, :user2

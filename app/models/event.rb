@@ -16,6 +16,7 @@ class Event < ApplicationRecord
   def generate_bracket
     shuffled_users = users.shuffle
 
+    update! bracket: nil
     Match.where(event: self).each(&:destroy)
     first_round_match_list = []
     shuffled_users.each_slice(2) do |user1, user2|
@@ -48,7 +49,7 @@ class Event < ApplicationRecord
 
     previous_match_1 = Match.create(event: self)
     previous_match_2 = Match.create(event: self)
-    node.update!(previous_match_1:, previous_match_2:)
+    node.update!(previous_match_1: previous_match_1.id, previous_match_2: previous_match_2.id)
 
     splitted_array = array.in_groups_of(array.length / 2, false)
     generate_tree(splitted_array.first, previous_match_1)
