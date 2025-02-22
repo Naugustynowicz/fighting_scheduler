@@ -79,7 +79,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_154608) do
     t.text "description"
     t.text "rules"
     t.text "schedule"
-    t.text "brackets"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -88,6 +87,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_154608) do
     t.integer "location_id"
     t.integer "sport_id"
     t.integer "type_event_id"
+    t.integer "bracket_id"
+    t.index ["bracket_id"], name: "index_events_on_bracket_id"
     t.index ["circuit_id"], name: "index_events_on_circuit_id"
     t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["sport_id"], name: "index_events_on_sport_id"
@@ -134,12 +135,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_154608) do
 
   create_table "matches", force: :cascade do |t|
     t.integer "event_id", null: false
-    t.integer "user1_id", null: false
-    t.integer "user2_id", null: false
+    t.integer "user1_id"
+    t.integer "user2_id"
     t.integer "winner_id"
+    t.integer "previous_match_1_id"
+    t.integer "previous_match_2_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_matches_on_event_id"
+    t.index ["previous_match_1_id"], name: "index_matches_on_previous_match_1_id"
+    t.index ["previous_match_2_id"], name: "index_matches_on_previous_match_2_id"
     t.index ["user1_id"], name: "index_matches_on_user1_id"
     t.index ["user2_id"], name: "index_matches_on_user2_id"
     t.index ["winner_id"], name: "index_matches_on_winner_id"
@@ -221,6 +226,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_154608) do
   add_foreign_key "comments", "articles"
   add_foreign_key "events", "circuits"
   add_foreign_key "events", "locations"
+  add_foreign_key "events", "matches", column: "bracket_id"
   add_foreign_key "events", "sports"
   add_foreign_key "events", "statuses"
   add_foreign_key "events", "type_events"
@@ -228,6 +234,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_154608) do
   add_foreign_key "events_teams", "circuits"
   add_foreign_key "events_users", "circuits"
   add_foreign_key "matches", "events"
+  add_foreign_key "matches", "matches", column: "previous_match_1_id"
+  add_foreign_key "matches", "matches", column: "previous_match_2_id"
   add_foreign_key "matches", "users", column: "user1_id"
   add_foreign_key "matches", "users", column: "user2_id"
   add_foreign_key "matches", "users", column: "winner_id"

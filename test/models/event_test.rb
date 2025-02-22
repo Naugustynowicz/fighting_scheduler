@@ -17,9 +17,18 @@ class EventTest < ActiveSupport::TestCase
       event.subscribe(attendee)
     end
 
-    tournament_tree = event.generate_tree_bracket
+    event.generate_tree_bracket
+    assert_nil event.bracket.user1
+    assert_nil event.bracket.user2
 
-    debugger
+    winner_match_1 = event.bracket.previous_match_1.user1
+    winner_match_2 = event.bracket.previous_match_2.user2
+    event.bracket.previous_match_1.determine_winner(winner_match_1)
+    event.bracket.previous_match_2.determine_winner(winner_match_2)
+    event.bracket.update_match
+
+    assert_equal event.bracket.user1, winner_match_1
+    assert_equal event.bracket.user2, winner_match_2
   end
 
   # remove_all!

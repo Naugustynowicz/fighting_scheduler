@@ -27,6 +27,12 @@ Rails.application.routes.draw do
       get :generate_tree_bracket
     end
   end
+  resources :matches do
+    member do
+      get :update_match
+      patch :determine_winner
+    end
+  end
   resources :locations
   resources :roles
   resources :sports
