@@ -31,5 +31,13 @@ class EventTest < ActiveSupport::TestCase
     assert_equal event.bracket.user2, winner_match_2
   end
 
-  # remove_all!
+  test "can generate a bigger bracket" do
+    event = events :simple_tournament
+    8.times do |i|
+      attendee = User.create(name: "user#{i}", email: "user#{i}@email.com", password: "123456")
+      event.subscribe(attendee)
+    end
+    event.generate_tree_bracket
+    assert event.bracket
+  end
 end

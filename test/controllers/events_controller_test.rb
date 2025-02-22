@@ -8,7 +8,5 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in user
     get "/events/#{event.id}/subscribe"
-
-    debugger
   end
 end

@@ -34,7 +34,6 @@ class Event < ApplicationRecord
   end
 
   def generate_tree(array, node)
-    debugger
     return if array.length < 2
     return unless array.length % 2 == 0
 
