@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include ActionController::Cookies
-  # after_action :set_csrf_cookie
+  after_action :set_csrf_cookie
   # def fallback_index_html
   #   render file: "public/index.html"
   # end
@@ -26,12 +26,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [ :email ])
   end
 
-  # def set_csrf_cookie
-  #   cookies["CSRF-TOKEN"] = {
-  #     value: form_authenticity_token,
-  #     secure: true,
-  #     same_site: :strict
-  #     # domain: "localhost:3000/ui/"
-  #   }
-  # end
+  # WIP
+  def set_csrf_cookie
+    cookies["CSRF-TOKEN"] = {
+      value: form_authenticity_token,
+      secure: true,
+      same_site: :strict
+      # domain: "localhost:3000/ui/"
+    }
+  end
 end
