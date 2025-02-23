@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get :subscribe
       get :attendees
       get :generate_tree_bracket
+      get :display_tree_bracket
     end
   end
   resources :matches do

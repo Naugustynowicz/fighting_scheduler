@@ -1,4 +1,4 @@
-class EventPolicy < ApplicationPolicy
+class MatchPolicy < ApplicationPolicy
   include BasicDatabasePolicy
 
   attr_reader :user, :event
@@ -8,21 +8,13 @@ class EventPolicy < ApplicationPolicy
     @event = event
   end
 
-  def show?
-    true
-  end
+  # def show?
+  #   true
+  # end
 
-  def subscribe?
-    show?
-  end
-
-  def generate_tree_bracket?
-    show?
-  end
-
-  def display_tree_bracket?
-    show?
-  end
+  # def subscribe?
+  #   show?
+  # end
 
   # def update?
   #   true

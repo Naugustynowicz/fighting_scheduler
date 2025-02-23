@@ -32,6 +32,7 @@ class Event < ApplicationRecord
     @current_round_matches = []
     generate_tree(first_round_match_list, final_match)
     update! bracket: final_match
+    final_match
   end
 
   def generate_tree(array, node)
@@ -43,7 +44,7 @@ class Event < ApplicationRecord
       # first_round_match_2 = Tree::TreeNode.new("name2", array.last)
       @current_round_matches.push array.first
       @current_round_matches.push array.second
-      node.update! previous_match_1: array.first, previous_match_2: array.second
+      node.update! previous_match_1: array.first.id, previous_match_2: array.second.id
       return
     end
 

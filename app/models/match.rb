@@ -15,6 +15,6 @@ class Match < ApplicationRecord
   end
 
   def update_match
-    update(user1: previous_match_1&.winner, user2: previous_match_2&.winner)
+    update(user1: Match.find(previous_match_1)&.winner, user2: Match.find(previous_match_2)&.winner)
   end
 end

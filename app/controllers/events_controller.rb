@@ -17,10 +17,25 @@ class EventsController < ApplicationController
 
   def generate_tree_bracket
     event = database.find(params[:id])
-    render json: event.generate_tree_bracket
+    render json: render_bracket(event.generate_tree_bracket)
+  end
+
+  def display_tree_bracket
+    event = database.find(params[:id])
+    render json: render_bracket(event.bracket)
   end
 
   private
+
+  def render_bracket(match)
+    return { match:, user1: match.user1, user2: match.user2 } if match.previous_match_1.blank? && match.previous_match_2.blank?
+
+    {
+      match:, user1: match.user1, user2: match.user2,
+      submatch1: render_bracket(Match.find(match.previous_match_1)),
+      submatch2: render_bracket(Match.find(match.previous_match_2))
+    }
+  end
 
   def database
     Event
