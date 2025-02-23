@@ -7,7 +7,7 @@ import EventList from "./events/eventList";
 export default function Events(){
   return (
     <EventsProvider>
-      <h1>Events' list</h1>
+      <h1>List of Events</h1>
       <AddEvent />
       <EventList />
     </EventsProvider>

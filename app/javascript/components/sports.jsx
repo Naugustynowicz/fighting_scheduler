@@ -7,7 +7,7 @@ import SportList from "./sports/sportList";
 export default function Sports(){
   return (
     <SportsProvider>
-      <h1>Sports' list</h1>
+      <h1>List of Sports</h1>
       <AddSport />
       <SportList />
     </SportsProvider>
