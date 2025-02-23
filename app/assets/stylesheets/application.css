@@ -13,3 +13,178 @@
  *= require_tree .
  *= require_self
  */
+ /* General reset for consistent rendering across browsers */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+/* Body and overall styling */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 20px;
+}
+
+/* Container for the application */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #58bed0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.container-attendees {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #69e3f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.container-tree {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #58bed0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: left;
+}
+
+/* Header styling */
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+}
+
+/* Heading */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Navigation links */
+nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+nav a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #4CAF50;
+}
+
+/* Section styles */
+section {
+  margin-top: 40px;
+}
+
+.section-tree {
+  margin-top: 5px;
+}
+
+/* List style */
+ul {
+  list-style-type: none;
+}
+
+.ul-tree {
+  background-color: whitesmoke;
+}
+
+li {
+  background-color: whitesmoke;
+  margin: 5px;
+  border-color: black;
+  border-radius: 5px;
+}
+
+/* Button styles */
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Form styling */
+form {
+  margin-top: 20px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border-radius: 8px;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  section {
+    padding: 20px;
+  }
+}

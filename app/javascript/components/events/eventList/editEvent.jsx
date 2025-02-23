@@ -5,7 +5,8 @@ export default function EditEvent({event}){
   const dispatch = useEventsDispatch();
   let eventContent;
   eventContent = (
-    <>
+    <section>
+      <div class='container'>
       <input
         placeholder="startDate"
         value={event.startDate}
@@ -205,6 +206,8 @@ export default function EditEvent({event}){
           });
         }} 
       />
+      </div>
+      <div class='button-container'>
       <button onClick={() => {
         dispatch({
           type: 'commitChanges',
@@ -228,7 +231,8 @@ export default function EditEvent({event}){
       }}>
         Save
       </button>
-    </>
+      </div>
+    </section>
   );
 
   return eventContent;

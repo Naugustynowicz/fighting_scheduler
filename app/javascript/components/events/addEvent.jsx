@@ -22,7 +22,8 @@ export default function AddEvent() {
 
   let nextId = useEvents().length + 1;
   return (
-    <>
+    <section>
+    <div class='container'>
       <input
         placeholder="start date"
         value={startDate}
@@ -102,6 +103,7 @@ export default function AddEvent() {
         value={typeEventId}
         onChange={e => setTypeEventId(e.target.value)}
       />
+      </div><div class='button-container'>
       <button onClick={() => {
         dispatch({
           type: 'added',
@@ -124,6 +126,7 @@ export default function AddEvent() {
           status: 'public'
         });
       }}>Add</button>
-    </>
+    </div>
+    </section>
   )
 }

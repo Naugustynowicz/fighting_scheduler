@@ -9,7 +9,7 @@ export default function AddSport() {
 
   let nextId = useSports().length + 1;
   return (
-    <>
+    <div class='container'>
       <input
         placeholder="name"
         value={name}
@@ -32,6 +32,6 @@ export default function AddSport() {
           status: 'public'
         });
       }}>Add</button>
-    </>
+    </div>
   )
 }

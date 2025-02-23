@@ -9,7 +9,9 @@ function NavigationBar() {
   // TODO: Actually implement a navigation bar
   return (
     <>
-    <h1>Hello from React!</h1>
+    <header>
+      <h1>Fighting Scheduler</h1>
+    </header>
     <nav>
       <ul>
         <li>
@@ -23,7 +25,6 @@ function NavigationBar() {
         </li>
       </ul>
     </nav>
-
     <Outlet />
     </>
   );

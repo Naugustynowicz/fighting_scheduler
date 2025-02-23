@@ -34,16 +34,17 @@ export default function Attendees({event_id}) {
     }, [])
 
   return (
-    <>
+    <section>
+      <div class='container'>
       <ul>
         {attendees.map(attendee => (
-          <li key={attendee.id}>
-            <h2>{attendee.name}</h2>
-            <p>{attendee.other}</p>
+          <li key={attendee.id}>{attendee.name}
+            <text>{attendee.other}</text>
           </li>
         ))}
       </ul>
-    </>
+      </div>
+    </section>
   );
 }
 

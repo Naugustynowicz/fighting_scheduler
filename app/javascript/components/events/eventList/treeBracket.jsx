@@ -71,15 +71,18 @@ export default function TreeBracket({event_id}) {
       }
     
       return(
-        <>
-          {displayedSubmatch1}
-          {displayedSubmatch2}
-          <h4> --- subtree --- </h4>
-          {displayedId}
-          {displayedWinner}
-          {displayedUser1}
-          {displayedUser2}
-        </>
+        <section class='section-tree'>
+          <div class='container-tree'>
+            <ul class='ul-tree'>
+            {displayedSubmatch1}
+            {displayedId}
+            {displayedWinner}
+            {displayedUser1}
+            {displayedUser2}
+            {displayedSubmatch2}
+            </ul>
+          </div>
+        </section>
       )
     }
 
