@@ -30,7 +30,13 @@ Sport.find_or_create_by!(name: 'Super Smash Bros. Ultimate', description: "Can b
 simple_tournament = Event.find_or_create_by!(name: 'Simple tournament', description: 'Simple tournament used for tests.')
 Event.find_or_create_by!(name: 'Event2', description: 'This is an event')
 
-8.times do |i|
+User.find_or_create_by!(email: "user@email.com") do |user|
+  user.name = "user"
+  user.password = "user_password"
+  user.password_confirmation = "user_password"
+end
+
+7.times do |i|
   user = User.find_or_create_by!(email: "athlete#{i}@test.com") do |user|
     user.name = "athlete#{i}"
     user.password = "athlete#{i}"
