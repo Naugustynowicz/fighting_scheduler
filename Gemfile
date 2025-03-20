@@ -41,6 +41,8 @@ gem "vite_rails"
 gem "devise"
 # Authorization gem
 gem "pundit"
+# config requests
+gem "rack-cors"
 
 # gem "rubytree"
 
