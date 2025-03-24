@@ -43,6 +43,10 @@ gem "devise"
 gem "pundit"
 # config requests
 gem "rack-cors"
+# enable devise for api use
+gem "devise-jwt"
+# json api serializer
+gem "jsonapi-serializer"
 
 # gem "rubytree"
 

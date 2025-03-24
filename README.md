@@ -4,6 +4,11 @@
 bin/vite dev # with frontend
 rails server # backend only
 
+# generate secret key
+bundle exec rails secret
+# with VSCode, open the encrypted credentials file
+EDITOR='code --wait' rails credentials:edit
+
 # Default text
 This README would normally document whatever steps are necessary to get the
 application up and running.
