@@ -27,23 +27,24 @@ module FightingScheduler
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "http://localhost:5173", "http://localhost:3000"
+        # origins "http://localhost:5173", "http://localhost:3000"
+        origins "*"
 
         resource "*",
           headers: :any,
-          methods: [ :get, :post, :put, :patch, :delete, :options, :head ],
-          credentials: true
+          methods: [ :get, :post, :put, :patch, :delete, :options, :head ]
+        # credentials: true
         # absoultly remember to set this in to true, and in your ajax to set  credentials: 'include'
       end
 
-      allow do
-        origins "http://localhost:5000" # 5000 is the port your can set yours to what ever you want.
-
-        resource "*",
-          headers: :any,
-          methods: [ :get, :post, :put, :patch, :delete, :options, :head ],
-          credentials: true
-      end
+      # allow do
+      #   origins "http://localhost:5000" # 5000 is the port your can set yours to what ever you want.
+      #
+      #   resource "*",
+      #     headers: :any,
+      #     methods: [ :get, :post, :put, :patch, :delete, :options, :head ],
+      #     credentials: true
+      # end
     end
   end
 end
