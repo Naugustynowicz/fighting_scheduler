@@ -5,6 +5,21 @@ bob:
   email: bob@email.com
   encrypted_password: something
 
+ann:
+  name: ann
+  email: ann@email.com
+  encrypted_password: otherthing
+
+jean:
+  name: jean
+  email: jean@email.com
+  encrypted_password: whatever
+
+iris:
+  name: iris
+  email: iris@email.com
+  encrypted_password: anything
+
 admin:
   name: admin
   email: admin@email.com
@@ -20,3 +35,8 @@ circuit_organizer:
   name: circuit_organizer
   email: cicruit_orga@email.com
   encrypted_password: '456789'
+
+trainer:
+  name: trainer
+  email: trainer@email.com
+  encrypted_password: '123789'

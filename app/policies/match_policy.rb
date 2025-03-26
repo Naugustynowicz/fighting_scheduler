@@ -8,9 +8,9 @@ class MatchPolicy < ApplicationPolicy
     @event = event
   end
 
-  # def show?
-  #   true
-  # end
+  def show?
+    true
+  end
 
   # def subscribe?
   #   show?

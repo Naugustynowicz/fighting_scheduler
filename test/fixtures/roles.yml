@@ -3,3 +3,15 @@
 admin:
   name: admin
   users: admin
+
+event_orga:
+  name: event_orga
+
+circuit_orga:
+  name: circuit_orga
+
+trainer:
+  name: trainer
+
+athlete:
+  name: athlete

@@ -11,6 +11,7 @@ class Match < ApplicationRecord
 
   def determine_winner(winning_user)
     return unless [ user1, user2 ].include? winning_user
+
     update!(winner: winning_user)
   end
 

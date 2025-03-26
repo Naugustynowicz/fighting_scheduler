@@ -1,0 +1,24 @@
+qualifier1: 
+  event: simple_tournament
+  user1: bob
+  user2: ann
+  winner_id: null
+  previous_match_1: null
+  previous_match_2: null
+
+qualifier2: 
+  event: simple_tournament
+  user1: jean
+  user2: iris
+  winner_id: null
+  previous_match_1: null
+  previous_match_2: null
+
+finale: 
+  event: simple_tournament
+  user1_id: null
+  user2_id: null
+  winner_id: null
+  previous_match_1: qualifier1
+  previous_match_2: qualifier2
+      

@@ -1,5 +1,5 @@
 class Location < ApplicationRecord
-  include Visible
+  # include Visible
 
   validates :name, presence: true
 end
