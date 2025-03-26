@@ -11,14 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "status"
-  end
-
   create_table "circuits", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -35,6 +27,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.integer "circuit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["circuit_id"], name: "index_circuits_statuses_on_circuit_id"
+    t.index ["status_id"], name: "index_circuits_statuses_on_status_id"
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -57,16 +51,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.integer "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string "commenter"
-    t.text "body"
-    t.integer "article_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "status"
-    t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["club_id"], name: "index_clubs_statuses_on_club_id"
+    t.index ["status_id"], name: "index_clubs_statuses_on_status_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -102,6 +88,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.integer "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_events_statuses_on_event_id"
+    t.index ["status_id"], name: "index_events_statuses_on_status_id"
   end
 
   create_table "events_teams", id: false, force: :cascade do |t|
@@ -111,6 +99,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["circuit_id"], name: "index_events_teams_on_circuit_id"
+    t.index ["event_id"], name: "index_events_teams_on_event_id"
+    t.index ["team_id"], name: "index_events_teams_on_team_id"
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
@@ -120,6 +110,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["circuit_id"], name: "index_events_users_on_circuit_id"
+    t.index ["event_id"], name: "index_events_users_on_event_id"
+    t.index ["user_id"], name: "index_events_users_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -159,6 +151,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.integer "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_roles_users_on_role_id"
+    t.index ["user_id"], name: "index_roles_users_on_user_id"
   end
 
   create_table "sports", force: :cascade do |t|
@@ -223,7 +217,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   add_foreign_key "clubs", "sports"
   add_foreign_key "clubs", "statuses"
   add_foreign_key "clubs", "users"
-  add_foreign_key "comments", "articles"
   add_foreign_key "events", "circuits"
   add_foreign_key "events", "locations"
   add_foreign_key "events", "matches", column: "bracket_id"
