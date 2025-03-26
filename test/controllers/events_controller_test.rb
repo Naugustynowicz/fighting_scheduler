@@ -60,7 +60,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "admin can delete event" do
-    # WIP error due to matches foreign keys not handled
     sign_in admin
 
     delete "/events/#{event.id}"

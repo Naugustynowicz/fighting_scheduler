@@ -226,7 +226,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   add_foreign_key "events", "users"
   add_foreign_key "events_teams", "circuits"
   add_foreign_key "events_users", "circuits"
-  add_foreign_key "matches", "events"
+  add_foreign_key "matches", "events", on_delete: :cascade
   add_foreign_key "matches", "users", column: "user1_id"
   add_foreign_key "matches", "users", column: "user2_id"
   add_foreign_key "matches", "users", column: "winner_id"
