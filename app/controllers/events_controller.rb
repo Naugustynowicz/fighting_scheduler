@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   include Identification
   include BasicDatabaseFunctions
 
+  # TODO use patch request instead
   def subscribe
     event = database.find(params[:id])
     event.subscribe(current_user)
@@ -15,6 +16,7 @@ class EventsController < ApplicationController
     render json: event.users
   end
 
+  # TODO use post request instead
   def generate_tree_bracket
     event = database.find(params[:id])
     render json: render_bracket(event.generate_tree_bracket)
