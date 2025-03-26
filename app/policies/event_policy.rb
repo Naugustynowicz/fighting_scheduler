@@ -16,8 +16,12 @@ class EventPolicy < ApplicationPolicy
     show?
   end
 
-  def generate_tree_bracket?
+  def attendees?
     show?
+  end
+
+  def generate_tree_bracket?
+    create?
   end
 
   def display_tree_bracket?
