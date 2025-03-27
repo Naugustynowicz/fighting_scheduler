@@ -211,27 +211,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.index ["team_id"], name: "index_users_on_team_id"
   end
 
-  add_foreign_key "circuits", "statuses"
-  add_foreign_key "circuits", "users"
-  add_foreign_key "clubs", "locations"
-  add_foreign_key "clubs", "sports"
-  add_foreign_key "clubs", "statuses"
-  add_foreign_key "clubs", "users"
-  add_foreign_key "events", "circuits"
-  add_foreign_key "events", "locations"
-  add_foreign_key "events", "matches", column: "bracket_id"
-  add_foreign_key "events", "sports"
-  add_foreign_key "events", "statuses"
-  add_foreign_key "events", "type_events"
-  add_foreign_key "events", "users"
-  add_foreign_key "events_teams", "circuits"
-  add_foreign_key "events_users", "circuits"
+  add_foreign_key "circuits", "statuses", on_delete: :nullify
+  add_foreign_key "circuits", "users", on_delete: :nullify
+  add_foreign_key "clubs", "locations", on_delete: :nullify
+  add_foreign_key "clubs", "sports", on_delete: :nullify
+  add_foreign_key "clubs", "statuses", on_delete: :nullify
+  add_foreign_key "clubs", "users", on_delete: :nullify
+  add_foreign_key "events", "circuits", on_delete: :nullify
+  add_foreign_key "events", "locations", on_delete: :nullify
+  add_foreign_key "events", "matches", column: "bracket_id", on_delete: :cascade
+  add_foreign_key "events", "sports", on_delete: :nullify
+  add_foreign_key "events", "statuses", on_delete: :nullify
+  add_foreign_key "events", "type_events", on_delete: :nullify
+  add_foreign_key "events", "users", on_delete: :nullify
+  add_foreign_key "events_teams", "circuits", on_delete: :nullify
+  add_foreign_key "events_users", "circuits", on_delete: :nullify
   add_foreign_key "matches", "events", on_delete: :cascade
-  add_foreign_key "matches", "users", column: "user1_id"
-  add_foreign_key "matches", "users", column: "user2_id"
-  add_foreign_key "matches", "users", column: "winner_id"
-  add_foreign_key "teams", "clubs"
-  add_foreign_key "users", "clubs"
-  add_foreign_key "users", "locations"
-  add_foreign_key "users", "teams"
+  add_foreign_key "matches", "users", column: "user1_id", on_delete: :cascade
+  add_foreign_key "matches", "users", column: "user2_id", on_delete: :cascade
+  add_foreign_key "matches", "users", column: "winner_id", on_delete: :cascade
+  add_foreign_key "teams", "clubs", on_delete: :nullify
+  add_foreign_key "users", "clubs", on_delete: :nullify
+  add_foreign_key "users", "locations", on_delete: :nullify
+  add_foreign_key "users", "teams", on_delete: :nullify
 end

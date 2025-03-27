@@ -2,78 +2,94 @@ require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-   test "everyone can see circuits list" do
+   test "everyone can see users list" do
     sign_in user
 
-    get "/circuits"
-    assert JSON.parse(response.body).include? JSON.parse(circuit.to_json)
+    get "/users"
+    assert JSON.parse(response.body).include? JSON.parse(user.to_json)
   end
 
-  test "normal user can't see circuit details" do
+  test "user can see its own profil" do
     sign_in user
 
-    error = assert_raises Pundit::NotAuthorizedError do
-      get "/circuits/#{circuit.id}"
-    end
-    assert_equal "not allowed to CircuitPolicy#show? this Circuit", error.message
+    get "/users/#{user.id}"
+    assert_equal JSON.parse(response.body), JSON.parse(user.to_json)
   end
 
-  test "admin can see circuit details" do
-    sign_in admin
-
-    get "/circuits/#{circuit.id}"
-    assert_equal JSON.parse(response.body), JSON.parse(circuit.to_json)
-  end
-
-  test "standard user cannot create circuit" do
+  test "user cannot see other's profil" do
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      post "/circuits", params: { circuit: { name: "test1", description: "description1" } }
+      get "/users/#{other_user.id}"
     end
-    assert_equal "not allowed to CircuitPolicy#create? this Circuit", error.message
+    assert_equal "not allowed to UserPolicy#show? this User", error.message
   end
 
-  test "admin can create circuit" do
+  test "admin can see any user profil" do
     sign_in admin
 
-    post "/circuits", params: { circuit: { name: "test1", description: "description1" } }
-    assert_response :created
-    assert JSON.parse(Circuit.all.to_json).include? JSON.parse(response.body)
+    get "/users/#{user.id}"
+    assert_equal JSON.parse(response.body), JSON.parse(user.to_json)
   end
 
-  test "standard user cannot modify circuit" do
-    sign_in user
-
-    error = assert_raises Pundit::NotAuthorizedError do
-      patch "/circuits/#{circuit.id}", params: { circuit: { name: "test1", description: "description1" } }
-    end
-    assert_equal "not allowed to CircuitPolicy#update? this Circuit", error.message
-  end
-
-  test "admin can modify circuit" do
-    sign_in admin
-
-    patch "/circuits/#{circuit.id}", params: { circuit: { name: "test1", description: "description1" } }
+  test "anyone can create an user" do
+    post "/signup", params: payload
     assert_response :ok
-    assert JSON.parse(Circuit.all.to_json).include? JSON.parse(response.body)
+    assert User.find_by(email: payload[:user][:email]).present?
   end
 
-  test "standard user cannot delete circuit" do
+  test "anyone can update own profil" do
+    sign_in user
+
+    patch "/users/#{user.id}", params: { user: { name: "test" } }
+    user.reload
+    assert_equal "test", user.name
+  end
+
+  test "cannot update other's profil" do
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      delete "/circuits/#{circuit.id}"
+      patch "/users/#{other_user.id}", params: { user: { name: "test" } }
     end
-    assert_equal "not allowed to CircuitPolicy#destroy? this Circuit", error.message
+    assert_equal "not allowed to UserPolicy#update? this User", error.message
+    other_user.reload
+    assert_equal "ann", other_user.name
   end
 
-  test "admin can delete circuit" do
+  test "admin can modify any user" do
     sign_in admin
 
-    delete "/circuits/#{circuit.id}"
+    patch "/users/#{user.id}", params: { user: { name: "test" } }
+    assert_response :ok
+    user.reload
+    assert_equal "test", user.name
+  end
+
+  test "standard user cannot delete user" do
+    sign_in user
+
+    error = assert_raises Pundit::NotAuthorizedError do
+      delete "/users/#{user.id}"
+    end
+    assert_equal "not allowed to UserPolicy#destroy? this User", error.message
+  end
+
+  test "admin can delete user" do
+    sign_in admin
+
+    delete "/users/#{user.id}"
     assert_response :see_other
-    refute JSON.parse(Circuit.all.to_json).include? JSON.parse(circuit.to_json)
+    refute JSON.parse(User.all.to_json).include? JSON.parse(user.to_json)
+  end
+
+  test "admin cannot delete itself" do
+    sign_in admin
+
+    assert_raises Pundit::NotAuthorizedError do
+      delete "/users/#{admin.id}"
+    end
+    assert User.find(admin.id).present?
   end
 
   private
@@ -82,11 +98,20 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @user ||= users :bob
   end
 
+  def other_user
+    @other_user ||= users :ann
+  end
+
   def admin
     @admin ||= users :admin
   end
 
-  def circuit
-    @circuit ||= circuits :simple_circuit
+  def payload
+    {
+      user: {
+        email: "test@email.com",
+        password: "abcdef"
+      }
+    }
   end
 end

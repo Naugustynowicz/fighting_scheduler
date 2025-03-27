@@ -33,7 +33,7 @@ class CreateJoinTables < ActiveRecord::Migration[8.0]
       t.index :user_id
       t.index :event_id
 
-      t.references :circuit, null: true, foreign_key: true
+      t.references :circuit, null: true, foreign_key: { on_delete: :nullify }
 
       t.timestamps
     end
@@ -41,7 +41,7 @@ class CreateJoinTables < ActiveRecord::Migration[8.0]
     create_join_table :teams, :events do |t|
       t.index :team_id
       t.index :event_id
-      t.references :circuit, null: true, foreign_key: true
+      t.references :circuit, null: true, foreign_key: { on_delete: :nullify }
 
       t.timestamps
     end

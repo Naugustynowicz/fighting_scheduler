@@ -5,13 +5,15 @@ class EventsController < ApplicationController
   # TODO use patch request instead
   def subscribe
     event = database.find(params[:id])
-    event.subscribe(current_user)
+    authorize event
 
+    event.subscribe(current_user)
     render json: event.users
   end
 
   def attendees
     event = database.find(params[:id])
+    authorize event
 
     render json: event.users
   end
@@ -19,11 +21,15 @@ class EventsController < ApplicationController
   # TODO use post request instead
   def generate_tree_bracket
     event = database.find(params[:id])
+    authorize event
+
     render json: render_bracket(event.generate_tree_bracket)
   end
 
   def display_tree_bracket
     event = database.find(params[:id])
+    authorize event
+
     render json: render_bracket(event.bracket)
   end
 

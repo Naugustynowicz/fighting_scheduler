@@ -16,7 +16,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    # WIP
+    # TODO
     # @current_user.admin?
     true
   end
@@ -25,8 +25,12 @@ class UserPolicy < ApplicationPolicy
     @current_user.admin? or @current_user == @user
   end
 
+  def create?
+    true
+  end
+
   def update?
-    @current_user.admin?
+    @current_user.admin? or @current_user == @user
   end
 
   def destroy?
