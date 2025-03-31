@@ -142,7 +142,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def payload
-    {
+    return { # rubocop:disable Style/RedundantReturn
       match: {
         event_id: event.id,
         user1_id: user1.id,
