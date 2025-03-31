@@ -27,7 +27,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user1
 
     error = assert_raises Pundit::NotAuthorizedError do
-      post "/matches", params: payload
+      post "/matches", params: {
+        match: {
+          event_id: event.id,
+          user1_id: user1.id,
+          user2_id: user3.id,
+          winner_id: nil,
+          previous_match_1: nil,
+          previous_match_2: nil
+        }
+      }
     end
     assert_equal "not allowed to MatchPolicy#create? this Match", error.message
   end
@@ -35,7 +44,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can create match" do
     sign_in admin
 
-    post "/matches", params: payload
+    post "/matches", params: {
+      match: {
+        event_id: event.id,
+        user1_id: user1.id,
+        user2_id: user3.id,
+        winner_id: nil,
+        previous_match_1: nil,
+        previous_match_2: nil
+      }
+    }
     assert_response :created
     assert JSON.parse(Match.all.to_json).include? JSON.parse(response.body)
   end
@@ -44,7 +62,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user1
 
     error = assert_raises Pundit::NotAuthorizedError do
-      patch "/matches/#{qualifier1.id}", params: payload
+      patch "/matches/#{qualifier1.id}", params: {
+        match: {
+          event_id: event.id,
+          user1_id: user1.id,
+          user2_id: user3.id,
+          winner_id: nil,
+          previous_match_1: nil,
+          previous_match_2: nil
+        }
+      }
     end
     assert_equal "not allowed to MatchPolicy#update? this Match", error.message
   end
@@ -52,7 +79,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can modify match" do
     sign_in admin
 
-    patch "/matches/#{qualifier1.id}", params: payload
+    patch "/matches/#{qualifier1.id}", params: {
+      match: {
+        event_id: event.id,
+        user1_id: user1.id,
+        user2_id: user3.id,
+        winner_id: nil,
+        previous_match_1: nil,
+        previous_match_2: nil
+      }
+    }
     assert_response :ok
     assert JSON.parse(Match.all.to_json).include? JSON.parse(response.body)
   end
@@ -139,18 +175,5 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   def event
     @event ||= events :simple_tournament
-  end
-
-  def payload
-    return { # rubocop:disable Style/RedundantReturn
-      match: {
-        event_id: event.id,
-        user1_id: user1.id,
-        user2_id: user3.id,
-        winner_id: nil,
-        previous_match_1: nil,
-        previous_match_2: nil
-      }
-    }
   end
 end
