@@ -34,5 +34,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore env variables
+/config/application.yml
+/.env
+
 # ignore local notes
 /notes.txt
