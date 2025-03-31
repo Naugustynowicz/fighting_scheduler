@@ -30,7 +30,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      post "/locations", params: PAYLOAD
+      post "/locations", params: {
+        location: {
+          name: "location1",
+          other: "whatdayawant",
+          street: "1 street",
+          city: "city",
+          postal_code: "12345",
+          country: "country"
+        }
+      }
     end
     assert_equal "not allowed to LocationPolicy#create? this Location", error.message
   end
@@ -38,7 +47,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can create location" do
     sign_in admin
 
-    post "/locations", params: PAYLOAD
+    post "/locations", params: {
+      location: {
+        name: "location1",
+        other: "whatdayawant",
+        street: "1 street",
+        city: "city",
+        postal_code: "12345",
+        country: "country"
+      }
+    }
     assert_response :created
     assert JSON.parse(Location.all.to_json).include? JSON.parse(response.body)
   end
@@ -47,7 +65,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      patch "/locations/#{location.id}", params: PAYLOAD
+      patch "/locations/#{location.id}", params: {
+        location: {
+          name: "location1",
+          other: "whatdayawant",
+          street: "1 street",
+          city: "city",
+          postal_code: "12345",
+          country: "country"
+        }
+      }
     end
     assert_equal "not allowed to LocationPolicy#update? this Location", error.message
   end
@@ -55,7 +82,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can modify location" do
     sign_in admin
 
-    patch "/locations/#{location.id}", params: PAYLOAD
+    patch "/locations/#{location.id}", params: {
+      location: {
+        name: "location1",
+        other: "whatdayawant",
+        street: "1 street",
+        city: "city",
+        postal_code: "12345",
+        country: "country"
+      }
+    }
     assert_response :ok
     assert JSON.parse(Location.all.to_json).include? JSON.parse(response.body)
   end
@@ -90,15 +126,4 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   def location
     @location ||= locations :location1
   end
-
-  PAYLOAD = {
-    location: {
-      name: "location1",
-      other: "whatdayawant",
-      street: "1 street",
-      city: "city",
-      postal_code: "12345",
-      country: "country"
-    }
-  }.freeze
 end
