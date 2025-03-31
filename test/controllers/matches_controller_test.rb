@@ -52,7 +52,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can modify match" do
     sign_in admin
 
-    patch "/matches/#{match.id}", params: payload
+    patch "/matches/#{qualifier1.id}", params: payload
     assert_response :ok
     assert JSON.parse(Match.all.to_json).include? JSON.parse(response.body)
   end
