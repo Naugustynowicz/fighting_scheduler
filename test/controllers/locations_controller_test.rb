@@ -79,8 +79,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   private
 
-  attr_reader :payload
-
   def user
     @user ||= users :bob
   end
@@ -94,7 +92,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def payload
-    @payload ||= {
+    {
       location: {
         name: "location1",
         other: "whatdayawant",
@@ -103,6 +101,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
         postal_code: "12345",
         country: "country"
       }
-    }
+    }.freeze
   end
 end
