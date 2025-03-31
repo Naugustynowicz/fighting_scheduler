@@ -91,7 +91,7 @@ class SportsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def payload
-    {
+    @payload ||= {
       sport: {
         name: "test1",
         description: "whatdayawant"

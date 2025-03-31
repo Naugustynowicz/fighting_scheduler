@@ -91,7 +91,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def payload
-    {
+    @payload ||= {
       location: {
         name: "location1",
         other: "whatdayawant",

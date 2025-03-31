@@ -107,7 +107,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def payload
-    {
+    @payload ||= {
       user: {
         email: "test@email.com",
         password: "abcdef"
