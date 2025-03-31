@@ -3,19 +3,6 @@ require "test_helper"
 class EventsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  def setup
-    @payload = {
-      location: {
-        name: "location1",
-        other: "whatdayawant",
-        street: "1 street",
-        city: "city",
-        postal_code: "12345",
-        country: "country"
-      }
-    }
-  end
-
    test "everyone can see locations list" do
     sign_in user
 
@@ -43,7 +30,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      post "/locations", params: payload
+      post "/locations", params: PAYLOAD
     end
     assert_equal "not allowed to LocationPolicy#create? this Location", error.message
   end
@@ -51,7 +38,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can create location" do
     sign_in admin
 
-    post "/locations", params: payload
+    post "/locations", params: PAYLOAD
     assert_response :created
     assert JSON.parse(Location.all.to_json).include? JSON.parse(response.body)
   end
@@ -60,7 +47,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      patch "/locations/#{location.id}", params: payload
+      patch "/locations/#{location.id}", params: PAYLOAD
     end
     assert_equal "not allowed to LocationPolicy#update? this Location", error.message
   end
@@ -68,7 +55,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can modify location" do
     sign_in admin
 
-    patch "/locations/#{location.id}", params: payload
+    patch "/locations/#{location.id}", params: PAYLOAD
     assert_response :ok
     assert JSON.parse(Location.all.to_json).include? JSON.parse(response.body)
   end
@@ -104,16 +91,14 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @location ||= locations :location1
   end
 
-  # def payload
-  #   {
-  #     location: {
-  #       name: "location1",
-  #       other: "whatdayawant",
-  #       street: "1 street",
-  #       city: "city",
-  #       postal_code: "12345",
-  #       country: "country"
-  #     }
-  #   }
-  # end
+  PAYLOAD = {
+    location: {
+      name: "location1",
+      other: "whatdayawant",
+      street: "1 street",
+      city: "city",
+      postal_code: "12345",
+      country: "country"
+    }
+  }.freeze
 end
