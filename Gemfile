@@ -35,7 +35,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # Frontend : use vite react gem
-gem "vite_rails"
+# gem "vite_rails"
 
 # Authentification gem
 gem "devise"
