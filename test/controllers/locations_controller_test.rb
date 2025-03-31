@@ -2,6 +2,7 @@ require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+
    test "everyone can see locations list" do
     sign_in user
 
@@ -77,6 +78,8 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   private
+
+  attr_reader :payload
 
   def user
     @user ||= users :bob
