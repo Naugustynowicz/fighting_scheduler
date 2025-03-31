@@ -12,7 +12,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user1
 
     get "/matches"
-    assert JSON.parse(response.body).include? JSON.parse(match.to_json)
+    assert JSON.parse(response.body).include? JSON.parse(qualifier1.to_json)
   end
 
   test "everyone can see match details" do

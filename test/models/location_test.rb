@@ -8,8 +8,7 @@ class LocationTest < ActiveSupport::TestCase
       street: "01 StreetTest1 of Location1",
       city: "CityName1",
       postal_code: "12345",
-      country: "CountryName1",
-      status: "public"
+      country: "CountryName1"
     )
     assert Location.find(location.id)
   end

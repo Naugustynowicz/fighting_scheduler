@@ -21,10 +21,12 @@ class EventTest < ActiveSupport::TestCase
     assert_nil event.bracket.user1
     assert_nil event.bracket.user2
 
-    winner_match_1 = event.bracket.previous_match_1.user1
-    winner_match_2 = event.bracket.previous_match_2.user2
-    event.bracket.previous_match_1.determine_winner(winner_match_1)
-    event.bracket.previous_match_2.determine_winner(winner_match_2)
+    previous_match_1 = Match.find(event.bracket.previous_match_1)
+    previous_match_2 = Match.find(event.bracket.previous_match_2)
+    winner_match_1 = previous_match_1.user1
+    winner_match_2 = previous_match_2.user2
+    previous_match_1.determine_winner(winner_match_1)
+    previous_match_2.determine_winner(winner_match_2)
     event.bracket.update_match
 
     assert_equal event.bracket.user1, winner_match_1
