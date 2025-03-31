@@ -29,6 +29,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in admin
 
     post "/events", params: payload
+    puts response.body
     assert_response :created
     assert JSON.parse(Event.all.to_json).include? JSON.parse(response.body)
   end
