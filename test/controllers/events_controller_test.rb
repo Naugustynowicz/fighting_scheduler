@@ -28,8 +28,13 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can create event" do
     sign_in admin
 
-    post "/events", params: payload
-    puts response.body.to_json
+    post "/events", params: {
+      event: {
+        name: "event1",
+        description: "whatdayawant"
+      }
+    }
+    puts response.body
     assert_response :created
     assert JSON.parse(Event.all.to_json).include? JSON.parse(response.body)
   end
