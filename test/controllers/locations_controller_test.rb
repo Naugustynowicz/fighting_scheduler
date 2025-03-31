@@ -3,6 +3,19 @@ require "test_helper"
 class EventsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
+  def setup
+    @payload = {
+      location: {
+        name: "location1",
+        other: "whatdayawant",
+        street: "1 street",
+        city: "city",
+        postal_code: "12345",
+        country: "country"
+      }
+    }
+  end
+
    test "everyone can see locations list" do
     sign_in user
 
@@ -91,16 +104,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @location ||= locations :location1
   end
 
-  def payload
-    {
-      location: {
-        name: "location1",
-        other: "whatdayawant",
-        street: "1 street",
-        city: "city",
-        postal_code: "12345",
-        country: "country"
-      }
-    }.freeze
-  end
+  # def payload
+  #   {
+  #     location: {
+  #       name: "location1",
+  #       other: "whatdayawant",
+  #       street: "1 street",
+  #       city: "city",
+  #       postal_code: "12345",
+  #       country: "country"
+  #     }
+  #   }
+  # end
 end
