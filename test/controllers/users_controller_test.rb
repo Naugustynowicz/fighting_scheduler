@@ -33,9 +33,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "anyone can create an user" do
-    post "/signup", params: payload
+    post "/signup", params: PAYLOAD
     assert_response :ok
-    assert User.find_by(email: payload[:user][:email]).present?
+    assert User.find_by(email: PAYLOAD[:user][:email]).present?
   end
 
   test "anyone can update own profil" do
@@ -106,12 +106,10 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @admin ||= users :admin
   end
 
-  def payload
-    @payload ||= {
-      user: {
-        email: "test@email.com",
-        password: "abcdef"
-      }
+  PAYLOAD = {
+    user: {
+      email: "test@email.com",
+      password: "abcdef"
     }
-  end
+  }.freeze
 end

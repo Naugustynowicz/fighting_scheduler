@@ -20,7 +20,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      post "/events", params: payload
+      post "/events", params: PAYLOAD
     end
     assert_equal "not allowed to EventPolicy#create? this Event", error.message
   end
@@ -28,7 +28,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can create event" do
     sign_in admin
 
-    post "/events", params: payload
+    post "/events", params: PAYLOAD
     assert_response :created
     assert JSON.parse(Event.all.to_json).include? JSON.parse(response.body)
   end
@@ -37,7 +37,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      patch "/events/#{event.id}", params: payload
+      patch "/events/#{event.id}", params: PAYLOAD
     end
     assert_equal "not allowed to EventPolicy#update? this Event", error.message
   end
@@ -45,7 +45,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test "admin can modify event" do
     sign_in admin
 
-    patch "/events/#{event.id}", params: payload
+    patch "/events/#{event.id}", params: PAYLOAD
     assert_response :ok
     assert JSON.parse(Event.all.to_json).include? JSON.parse(response.body)
   end
@@ -138,12 +138,10 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @event ||= events :simple_tournament
   end
 
-  def payload
-    @payload ||= {
-      event: {
-        name: "event1",
-        description: "whatdayawant"
-      }
+  PAYLOAD =  {
+    event: {
+      name: "event1",
+      description: "whatdayawant"
     }
-  end
+  }.freeze
 end

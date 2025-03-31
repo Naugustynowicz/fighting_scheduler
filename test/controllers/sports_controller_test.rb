@@ -29,7 +29,7 @@ class SportsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      post "/sports", params: payload
+      post "/sports", params: PAYLOAD
     end
     assert_equal "not allowed to SportPolicy#create? this Sport", error.message
   end
@@ -37,7 +37,7 @@ class SportsControllerTest < ActionDispatch::IntegrationTest
   test "admin can create sport" do
     sign_in admin
 
-    post "/sports", params: payload
+    post "/sports", params: PAYLOAD
     assert_response :created
     assert JSON.parse(Sport.all.to_json).include? JSON.parse(response.body)
   end
@@ -46,7 +46,7 @@ class SportsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     error = assert_raises Pundit::NotAuthorizedError do
-      patch "/sports/#{sport.id}", params: payload
+      patch "/sports/#{sport.id}", params: PAYLOAD
     end
     assert_equal "not allowed to SportPolicy#update? this Sport", error.message
   end
@@ -54,7 +54,7 @@ class SportsControllerTest < ActionDispatch::IntegrationTest
   test "admin can modify sport" do
     sign_in admin
 
-    patch "/sports/#{sport.id}", params: payload
+    patch "/sports/#{sport.id}", params: PAYLOAD
     assert_response :ok
     assert JSON.parse(Sport.all.to_json).include? JSON.parse(response.body)
   end
@@ -90,12 +90,10 @@ class SportsControllerTest < ActionDispatch::IntegrationTest
     @sport ||= sports :sport1
   end
 
-  def payload
-    @payload ||= {
-      sport: {
-        name: "test1",
-        description: "whatdayawant"
-      }
+  PAYLOAD = {
+    sport: {
+      name: "test1",
+      description: "whatdayawant"
     }
-  end
+  }.freeze
 end
