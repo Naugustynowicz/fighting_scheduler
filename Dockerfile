@@ -17,10 +17,15 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
-ENV RAILS_ENV="production" \
+# ENV RAILS_ENV="production" \
+#     BUNDLE_DEPLOYMENT="1" \
+#     BUNDLE_PATH="/usr/local/bundle" \
+#     BUNDLE_WITHOUT="development"
+
+# Set development environnment
+ENV RAILS_ENV="development" \
     BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_PATH="/usr/local/bundle"
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -60,6 +65,10 @@ RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER 1000:1000
+
+# setup environment
+RUN bin/rails db:migrate
+RUN bin/rails db:seed
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
