@@ -54,4 +54,16 @@ class EventsController < ApplicationController
       :start_date, :end_date, :attendees_nb, :venue_fee, :required_score, :name, :description, :rules, :schedule, :bracket, :user_id, :status_id, :location_id, :sport_id, :type_event_id
     ])
   end
+
+  def current_user
+    if request.headers["Authorization"].present?
+      jwt_payload = JWT.decode(
+        request.headers["Authorization"].split(" ").last,
+        Rails.application.credentials.devise_jwt_secret_key!
+      ).first
+      return User.find(jwt_payload["sub"])
+    end
+
+    super
+  end
 end

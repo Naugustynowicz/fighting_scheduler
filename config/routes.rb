@@ -23,12 +23,8 @@ Rails.application.routes.draw do
   root "application#index"
 
   # define rails paths
-  resources :articles do
-    resources :comments
-  end
   resources :circuits
   resources :clubs
-  resources :evenements
   resources :events do
     member do
       get :subscribe
