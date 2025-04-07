@@ -36,6 +36,7 @@ class EventsController < ApplicationController
   private
 
   def render_bracket(match)
+    return {} unless match.present?
     return { match:, user1: match.user1, user2: match.user2 } if match.previous_match_1.blank? && match.previous_match_2.blank?
 
     {
