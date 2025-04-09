@@ -1,34 +1,31 @@
 # README
 
-# start dev app
-bin/vite dev # with frontend
-rails server # backend only
+# installation instructions
+This API is the backend part of my finghting scheduler project. You can use it as a json api or with this associated frontend. You can install or run this app localy or with docker.
 
-# generate secret key
-bundle exec rails secret
-# with VSCode, open the encrypted credentials file
-EDITOR='code --wait' rails credentials:edit
+# local installation on linux ubuntu (Need Ubuntu Jammy 22.04 or newer)
+Install sqlite3 (present by default on every ubuntu distribution) :
+  $ sudo apt-get install sqlite3
 
-# Default text
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Install ruby :
+  # Install dependencies with apt
+  $ sudo apt update
+  $ sudo apt install build-essential rustc libssl-dev libyaml-dev zlib1g-dev libgmp-dev
 
-Things you may want to cover:
+  # Install Mise version manager
+  $ curl https://mise.run | sh
+  $ echo 'eval "$(~/.local/bin/mise activate)"' >> ~/.bashrc
+  $ source ~/.bashrc
 
-* Ruby version
+  # Install Ruby globally with Mise
+  $ mise use -g ruby@3
 
-* System dependencies
+Get all dependencies:
+  $ bundle install
 
-* Configuration
+launch API:
+  $ rails s
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# docker instructions
+build containers & launch API:
+  $ docker compose up --build -V
