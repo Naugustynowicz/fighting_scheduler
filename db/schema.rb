@@ -67,15 +67,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.text "schedule"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "bracket_id"
     t.integer "user_id"
     t.integer "circuit_id"
+    t.integer "club_id"
     t.integer "status_id"
     t.integer "location_id"
     t.integer "sport_id"
     t.integer "type_event_id"
-    t.integer "bracket_id"
     t.index ["bracket_id"], name: "index_events_on_bracket_id"
     t.index ["circuit_id"], name: "index_events_on_circuit_id"
+    t.index ["club_id"], name: "index_events_on_club_id"
     t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["sport_id"], name: "index_events_on_sport_id"
     t.index ["status_id"], name: "index_events_on_status_id"
@@ -218,6 +220,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   add_foreign_key "clubs", "statuses", on_delete: :nullify
   add_foreign_key "clubs", "users", on_delete: :nullify
   add_foreign_key "events", "circuits", on_delete: :nullify
+  add_foreign_key "events", "clubs", on_delete: :nullify
   add_foreign_key "events", "locations", on_delete: :nullify
   add_foreign_key "events", "matches", column: "bracket_id", on_delete: :cascade
   add_foreign_key "events", "sports", on_delete: :nullify

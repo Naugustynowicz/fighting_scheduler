@@ -29,7 +29,12 @@ Rails.application.routes.draw do
       patch :remove_event
     end
   end
-  resources :clubs
+  resources :clubs do
+    member do
+      patch :add_training
+      patch :remove_training
+    end
+  end
   resources :events do
     member do
       get :subscribe

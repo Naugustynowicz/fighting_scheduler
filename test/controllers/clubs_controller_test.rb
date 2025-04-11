@@ -76,6 +76,30 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     refute JSON.parse(Club.all.to_json).include? JSON.parse(club.to_json)
   end
 
+  test "admin can add training to club" do
+    sign_in admin
+
+    post "/events", params: {
+      event: {
+        name: "training1",
+        description: "whatdayawant",
+        type_event_id: type_events(:training).id
+      }
+    }
+    assert_response :created
+    training = Event.find(JSON.parse(response.body)["id"])
+
+    patch "/clubs/#{club.id}/add_training", params: { club: { event_id: training.id } }
+    assert_response :ok
+    training.reload
+    assert_equal training.club_id, club.id
+
+    patch "/clubs/#{club.id}/remove_training", params: { club: { event_id: training.id } }
+    assert_response :ok
+    training.reload
+    assert_nil training.club_id, club.id
+  end
+
   private
 
   def user

@@ -2,3 +2,6 @@
 
 tournament:
   name: tournament
+
+training:
+  name: training
