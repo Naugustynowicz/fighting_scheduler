@@ -89,6 +89,21 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_nil event.circuit_id, circuit.id
   end
 
+  test "standard user cannot add and remove event to circuit" do
+    sign_in user
+    assert_nil event.circuit_id
+
+    patch "/circuits/#{circuit.id}/add_event", params: { circuit: { event_id: event.id } }
+    assert_response :bad_request
+    assert_equal '"not allowed to CircuitPolicy#add_event? this Circuit"', response.body
+    event.reload
+    assert_nil event.circuit_id
+
+    patch "/circuits/#{circuit.id}/remove_event", params: { circuit: { event_id: event.id } }
+    assert_response :bad_request
+    assert_equal '"not allowed to CircuitPolicy#remove_event? this Circuit"', response.body
+  end
+
   private
 
   def user

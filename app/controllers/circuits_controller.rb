@@ -11,7 +11,7 @@ class CircuitsController < ApplicationController
     )
     render json: data
   rescue StandardError => e
-    render json: e
+    render json: e, status: :bad_request
   end
 
   def remove_event
@@ -23,7 +23,7 @@ class CircuitsController < ApplicationController
     )
     render json: data
   rescue StandardError => e
-    render json: e
+    render json: e, status: :bad_request
   end
 
   private
