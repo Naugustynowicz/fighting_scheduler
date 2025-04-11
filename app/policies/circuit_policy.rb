@@ -8,7 +8,15 @@ class CircuitPolicy < ApplicationPolicy
     @circuit = circuit
   end
 
-  # def update?
-  #   true
-  # end
+  def show?
+    true
+  end
+
+  def add_event?
+    update?
+  end
+
+  def remove_event?
+    update?
+  end
 end

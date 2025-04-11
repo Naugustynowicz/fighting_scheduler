@@ -9,13 +9,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body).include? JSON.parse(circuit.to_json)
   end
 
-  test "normal user can't see circuit details" do
+  test "normal user can see circuit details" do
     sign_in user
 
-    error = assert_raises Pundit::NotAuthorizedError do
-      get "/circuits/#{circuit.id}"
-    end
-    assert_equal "not allowed to CircuitPolicy#show? this Circuit", error.message
+    get "/circuits/#{circuit.id}"
+    assert_equal JSON.parse(response.body), JSON.parse(circuit.to_json)
   end
 
   test "admin can see circuit details" do
@@ -76,6 +74,21 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     refute JSON.parse(Circuit.all.to_json).include? JSON.parse(circuit.to_json)
   end
 
+  test "admin can add and remove event to circuit" do
+    sign_in admin
+    assert_nil event.circuit_id
+
+    patch "/circuits/#{circuit.id}/add_event", params: { circuit: { event_id: event.id } }
+    assert_response :ok
+    event.reload
+    assert_equal event.circuit_id, circuit.id
+
+    patch "/circuits/#{circuit.id}/remove_event", params: { circuit: { event_id: event.id } }
+    assert_response :ok
+    event.reload
+    assert_nil event.circuit_id, circuit.id
+  end
+
   private
 
   def user
@@ -88,5 +101,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   def circuit
     @circuit ||= circuits :simple_circuit
+  end
+
+  def event
+    @event ||= events :simple_tournament
   end
 end

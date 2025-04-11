@@ -1,8 +1,17 @@
 module Identification
   extend ActiveSupport::Concern
 
-  # included do
-  #   skip_before_action :verify_authenticity_token
-  #   http_basic_authenticate_with name: "dhh", password: "secret", except: [ :index, :show, :create, :update, :destroy ]
-  # end
+  private
+
+  def current_user
+    if request.headers["Authorization"].present?
+      jwt_payload = JWT.decode(
+        request.headers["Authorization"].split(" ").last,
+        Rails.application.credentials.devise_jwt_secret_key!
+      ).first
+      return User.find(jwt_payload["sub"])
+    end
+
+    super
+  end
 end

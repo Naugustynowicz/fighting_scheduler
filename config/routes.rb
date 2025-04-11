@@ -23,7 +23,12 @@ Rails.application.routes.draw do
   root "application#index"
 
   # define rails paths
-  resources :circuits
+  resources :circuits do
+    member do
+      patch :add_event
+      patch :remove_event
+    end
+  end
   resources :clubs
   resources :events do
     member do
