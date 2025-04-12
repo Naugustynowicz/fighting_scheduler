@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     member do
       patch :add_training
       patch :remove_training
+      get :list_events
     end
   end
   resources :events do

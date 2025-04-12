@@ -15,4 +15,8 @@ class ClubPolicy < ApplicationPolicy
   def remove_training?
     update?
   end
+
+  def list_events?
+    show?
+  end
 end

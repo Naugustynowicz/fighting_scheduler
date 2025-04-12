@@ -100,6 +100,28 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_nil training.club_id, club.id
   end
 
+  test "admin can see clubs events" do
+    sign_in admin
+    assert_nil event.club_id
+    assert_nil event2.club_id
+
+    patch "/clubs/#{club.id}/add_training", params: { club: { event_id: event.id } }
+    assert_response :ok
+    event.reload
+    assert_equal event.club_id, club.id
+
+    patch "/clubs/#{club.id}/add_training", params: { club: { event_id: event2.id } }
+    assert_response :ok
+    event2.reload
+    assert_equal event2.club_id, club.id
+
+    get "/clubs/#{club.id}/list_events"
+    assert_response :ok
+    res_list = JSON.parse(response.body)
+    assert res_list.include? JSON.parse(event.to_json)
+    assert res_list.include? JSON.parse(event2.to_json)
+  end
+
   private
 
   def user
@@ -112,5 +134,13 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   def club
     @club ||= clubs :simple_club
+  end
+
+  def event
+    @event ||= events :simple_tournament
+  end
+
+  def event2
+    @event2 ||= events :simple_tournament_2
   end
 end

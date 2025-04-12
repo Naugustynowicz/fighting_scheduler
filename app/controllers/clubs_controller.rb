@@ -26,6 +26,16 @@ class ClubsController < ApplicationController
     render json: e, status: :bad_request
   end
 
+  def list_events
+    data = database.find(params[:id])
+    authorize data
+
+    list_events = Event.where(club_id: data.id)
+    render json: list_events
+  rescue StandardError => e
+    render json: e, status: :bad_request
+  end
+
   private
 
   def database
