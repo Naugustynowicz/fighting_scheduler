@@ -26,6 +26,16 @@ class CircuitsController < ApplicationController
     render json: e, status: :bad_request
   end
 
+  def list_events
+    data = database.find(params[:id])
+    authorize data
+
+    list_events = Event.where(circuit_id: data.id)
+    render json: list_events
+  rescue StandardError => e
+    render json: e, status: :bad_request
+  end
+
   private
 
   def database

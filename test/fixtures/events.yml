@@ -4,3 +4,8 @@ simple_tournament:
   name: tournament1
   description: basic tournament
   rules: Fight!
+
+simple_tournament_2:
+  name: tournament2
+  description: another basic tournament
+  rules: Fight!

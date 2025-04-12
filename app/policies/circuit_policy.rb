@@ -19,4 +19,8 @@ class CircuitPolicy < ApplicationPolicy
   def remove_event?
     update?
   end
+
+  def list_events?
+    show?
+  end
 end

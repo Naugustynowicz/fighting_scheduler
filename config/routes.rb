@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     member do
       patch :add_event
       patch :remove_event
+      get :list_events
     end
   end
   resources :clubs do

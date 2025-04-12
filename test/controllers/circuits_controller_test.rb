@@ -104,6 +104,28 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_equal '"not allowed to CircuitPolicy#remove_event? this Circuit"', response.body
   end
 
+  test "admin can see circuits events" do
+    sign_in admin
+    assert_nil event.circuit_id
+    assert_nil event2.circuit_id
+
+    patch "/circuits/#{circuit.id}/add_event", params: { circuit: { event_id: event.id } }
+    assert_response :ok
+    event.reload
+    assert_equal event.circuit_id, circuit.id
+
+    patch "/circuits/#{circuit.id}/add_event", params: { circuit: { event_id: event2.id } }
+    assert_response :ok
+    event2.reload
+    assert_equal event2.circuit_id, circuit.id
+
+    get "/circuits/#{circuit.id}/list_events"
+    assert_response :ok
+    res_list = JSON.parse(response.body)
+    assert res_list.include? JSON.parse(event.to_json)
+    assert res_list.include? JSON.parse(event2.to_json)
+  end
+
   private
 
   def user
@@ -120,5 +142,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   def event
     @event ||= events :simple_tournament
+  end
+
+  def event2
+    @event2 ||= events :simple_tournament_2
   end
 end
