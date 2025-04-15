@@ -87,7 +87,6 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     refute JSON.parse(Event.all.to_json).include? JSON.parse(event.to_json)
   end
 
-  # WIP test controllers owns functions
   test "can subscribe to an event" do
     sign_in user
     get "/events/#{event.id}/subscribe"
