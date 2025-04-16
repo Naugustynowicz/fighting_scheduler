@@ -11,20 +11,23 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "circuits", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "status_id"
+    t.bigint "user_id"
+    t.bigint "status_id"
     t.index ["status_id"], name: "index_circuits_on_status_id"
     t.index ["user_id"], name: "index_circuits_on_user_id"
   end
 
   create_table "circuits_statuses", id: false, force: :cascade do |t|
-    t.integer "status_id", null: false
-    t.integer "circuit_id", null: false
+    t.bigint "status_id", null: false
+    t.bigint "circuit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["circuit_id"], name: "index_circuits_statuses_on_circuit_id"
@@ -36,10 +39,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status_id"
-    t.integer "user_id"
-    t.integer "sport_id"
-    t.integer "location_id"
+    t.bigint "status_id"
+    t.bigint "user_id"
+    t.bigint "sport_id"
+    t.bigint "location_id"
     t.index ["location_id"], name: "index_clubs_on_location_id"
     t.index ["sport_id"], name: "index_clubs_on_sport_id"
     t.index ["status_id"], name: "index_clubs_on_status_id"
@@ -47,8 +50,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   end
 
   create_table "clubs_statuses", id: false, force: :cascade do |t|
-    t.integer "status_id", null: false
-    t.integer "club_id", null: false
+    t.bigint "status_id", null: false
+    t.bigint "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["club_id"], name: "index_clubs_statuses_on_club_id"
@@ -67,14 +70,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.text "schedule"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "bracket_id"
-    t.integer "user_id"
-    t.integer "circuit_id"
-    t.integer "club_id"
-    t.integer "status_id"
-    t.integer "location_id"
-    t.integer "sport_id"
-    t.integer "type_event_id"
+    t.bigint "user_id"
+    t.bigint "circuit_id"
+    t.bigint "club_id"
+    t.bigint "status_id"
+    t.bigint "location_id"
+    t.bigint "sport_id"
+    t.bigint "type_event_id"
+    t.bigint "bracket_id"
     t.index ["bracket_id"], name: "index_events_on_bracket_id"
     t.index ["circuit_id"], name: "index_events_on_circuit_id"
     t.index ["club_id"], name: "index_events_on_club_id"
@@ -86,8 +89,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   end
 
   create_table "events_statuses", id: false, force: :cascade do |t|
-    t.integer "status_id", null: false
-    t.integer "event_id", null: false
+    t.bigint "status_id", null: false
+    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_events_statuses_on_event_id"
@@ -95,9 +98,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   end
 
   create_table "events_teams", id: false, force: :cascade do |t|
-    t.integer "team_id", null: false
-    t.integer "event_id", null: false
-    t.integer "circuit_id"
+    t.bigint "team_id", null: false
+    t.bigint "event_id", null: false
+    t.bigint "circuit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["circuit_id"], name: "index_events_teams_on_circuit_id"
@@ -106,9 +109,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "event_id", null: false
-    t.integer "circuit_id"
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.bigint "circuit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["circuit_id"], name: "index_events_users_on_circuit_id"
@@ -128,10 +131,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.integer "user1_id"
-    t.integer "user2_id"
-    t.integer "winner_id"
+    t.bigint "event_id", null: false
+    t.bigint "user1_id"
+    t.bigint "user2_id"
+    t.bigint "winner_id"
     t.bigint "previous_match_1"
     t.bigint "previous_match_2"
     t.datetime "created_at", null: false
@@ -149,8 +152,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
   end
 
   create_table "roles_users", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "role_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_roles_users_on_role_id"
@@ -174,7 +177,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "club_id"
+    t.bigint "club_id"
     t.index ["club_id"], name: "index_teams_on_club_id"
   end
 
@@ -191,9 +194,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.boolean "first_team"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "club_id"
-    t.integer "team_id"
-    t.integer "location_id"
+    t.bigint "club_id"
+    t.bigint "team_id"
+    t.bigint "location_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
