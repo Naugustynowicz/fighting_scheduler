@@ -7,6 +7,7 @@ class AddMatchModel < ActiveRecord::Migration[8.0]
       t.references :winner, null: true, foreign_key: { to_table: 'users', on_delete: :cascade }
       t.bigint :previous_match_1, null: true
       t.bigint :previous_match_2, null: true
+      t.bigint :next_match, null: true
 
       t.timestamps
     end

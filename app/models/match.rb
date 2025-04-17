@@ -5,6 +5,7 @@ class Match < ApplicationRecord
   belongs_to :winner, class_name: "User", optional: true
   # belongs_to :previous_match_1, class_name: "Match", optional: true
   # belongs_to :previous_match_2, class_name: "Match", optional: true
+  # belongs_to :next_match, class_name: "Match", optional: true
 
   # attr_reader :previous_match_1, :previous_match_2
   # attr_reader :user1, :user2
@@ -13,6 +14,7 @@ class Match < ApplicationRecord
     return unless [ user1, user2 ].include? winning_user
 
     update!(winner: winning_user)
+    Match.find(next_match).update_match if next_match.present?
   end
 
   def update_match

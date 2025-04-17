@@ -137,6 +137,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.bigint "winner_id"
     t.bigint "previous_match_1"
     t.bigint "previous_match_2"
+    t.bigint "next_match"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_matches_on_event_id"

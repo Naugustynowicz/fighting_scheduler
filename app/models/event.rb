@@ -39,17 +39,18 @@ class Event < ApplicationRecord
 
   def generate_tree(array, node)
     return if array.length < 2
-    return unless array.length % 2 == 0
 
     if array.length.eql? 2
+      array.first.update! next_match: node.id
+      array.second.update! next_match: node.id
       @current_round_matches.push array.first
       @current_round_matches.push array.second
       node.update! previous_match_1: array.first.id, previous_match_2: array.second.id
       return
     end
 
-    previous_match_1 = Match.create(event: self)
-    previous_match_2 = Match.create(event: self)
+    previous_match_1 = Match.create(event: self, next_match: node.id)
+    previous_match_2 = Match.create(event: self, next_match: node.id)
     node.update!(previous_match_1: previous_match_1.id, previous_match_2: previous_match_2.id)
 
     splitted_array = array.in_groups_of(array.length / 2, false)
