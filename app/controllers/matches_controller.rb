@@ -7,6 +7,9 @@ class MatchesController < ApplicationController
     match = database.find(params[:id])
     winner = User.find(params[:match][:winner])
     match.determine_winner(winner)
+
+    match_infos = { match: match, user1: match.user1, user2: match.user2 }
+    render json: match_infos
   end
 
   # TODO use patch request instead
@@ -14,6 +17,9 @@ class MatchesController < ApplicationController
   def update_match
     match = database.find(params[:id])
     match.update_match
+
+    match_infos = { match: match, user1: match.user1, user2: match.user2 }
+    render json: match_infos
   end
 
   def show
