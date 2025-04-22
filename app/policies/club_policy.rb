@@ -19,4 +19,16 @@ class ClubPolicy < ApplicationPolicy
   def list_events?
     show?
   end
+
+  def subscribe_user?
+    update?
+  end
+
+  def trainees?
+    show?
+  end
+
+  def delete_trainee?
+    update?
+  end
 end

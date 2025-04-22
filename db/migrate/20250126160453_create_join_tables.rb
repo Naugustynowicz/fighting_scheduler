@@ -38,6 +38,14 @@ class CreateJoinTables < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
+    # club attendees
+    create_join_table :users, :clubs do |t|
+      t.index :user_id
+      t.index :club_id
+
+      t.timestamps
+    end
+
     create_join_table :teams, :events do |t|
       t.index :team_id
       t.index :event_id

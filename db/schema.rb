@@ -58,6 +58,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_100743) do
     t.index ["status_id"], name: "index_clubs_statuses_on_status_id"
   end
 
+  create_table "clubs_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "club_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_clubs_users_on_club_id"
+    t.index ["user_id"], name: "index_clubs_users_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"

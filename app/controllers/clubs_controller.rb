@@ -36,6 +36,33 @@ class ClubsController < ApplicationController
     render json: e, status: :bad_request
   end
 
+  def subscribe_user
+    data = database.find(params[:id])
+    authorize data
+
+    data.subscribe_user(request_params[:user_id])
+    render json: data.users
+  rescue StandardError => e
+    render json: e, status: :bad_request
+  end
+
+  def trainees
+    club = database.find(params[:id])
+    authorize club
+
+    render json: club.users
+  end
+
+  def delete_trainee
+    club = database.find(params[:id])
+    authorize club
+
+    club.delete_trainee request_params[:user_id]
+    render json: club.users
+  rescue StandardError => e
+    render json: e, status: :bad_request
+  end
+
   private
 
   def database

@@ -122,6 +122,22 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert res_list.include? JSON.parse(event2.to_json)
   end
 
+  test "admin can add and remove user to club" do
+    sign_in admin
+    refute club.users.include? user
+    patch "/clubs/#{club.id}/subscribe_user", params: { club: {
+      user_id: user.id
+    } }
+    club.reload
+    assert club.users.include? user
+
+    patch "/clubs/#{club.id}/delete_trainee", params: { club: {
+      user_id: user.id
+    } }
+    club.reload
+    refute club.users.include? user
+  end
+
   private
 
   def user
